@@ -3,3 +3,5 @@
  
  The repo for Holberton Simple Shell
 This is a placeholder for now
+
+![Flowchart](https://github.com/loufi84/holbertonschool-simple_shell/blob/Features/Simple%20Shell%20flowchart.png)
