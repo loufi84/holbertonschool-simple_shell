@@ -6,30 +6,24 @@
 * Return: the line read
 */
 
-char read_line(void)
+char *read_line(void)
 {
-	char line = NULL;
+	char *line = NULL;
 	size_t len = 0;
 	ssize_t whole_line;
 
-	while (1)
+	printf("$ ");/*Prompt*/
+
+	whole_line = getline(&line, &len, stdin);/*Read user input*/
+
+	if (whole_line == -1) /*EOF, (Ctrl+D) or error*/
 	{
-		printf("$ ");/*Prompt*/
-
-		whole_line = getline(&line, &len, stdin);/*Read user input*/
-
-		if (whole_line == -1) /*EOF, (Ctrl+D) or error*/
-		{
-			printf("\n");
-			break;
-		}
-
-		printf("%s", line); /*Echo the input*/
+		printf("\n");
+		free(line);
+		return (NULL);
 	}
 
-	free(line);
-
-	return (0);
+	return (line);
 }
 
 /**
@@ -40,25 +34,43 @@ char read_line(void)
  * Return: a NULL-terminated array of tokens (words), or NULL on failure
  */
 
-char *split_string(char *string, char *array[])
+int split_string(char *string, char *array[])
 {
 	int i = 0;
 	char *token;
-	char delim[] = {"\"", " ", "\n", "\t", "\'", "(", ")", "{", "}", "&", "$",
-					"[", "]", "*", "\\", "|", "/", "!", ",", ";", "?", ":",
-					"<", ">", "-", "+", "~", "#", "=", "_", "^", "@", '\0'};
+	char *delim = " \t\n";
 
 	if (string == NULL)
-		return (NULL);
+		return (0);
 
 	token = strtok(string, delim);
 
-	for (i = 0; i != '\0'; i++)
+	while (token && i < MAX_ARGS - 1)
 	{
+		array[i++] = token;
 		token = strtok(NULL, delim);
 	}
 
 	array[i] = NULL;
 
-	return (array[i]);
+	return (i);
+}
+
+int main(void)
+{
+	char *line, *args[MAX_ARGS];
+	int i, count;
+
+	while (1)
+	{
+		line = read_line();
+		if (line == NULL)
+			break;
+		count = split_string(line, args);
+		printf("Tokens found : %d\n", count);
+		for (i = 0; i < count; i++)
+			printf("arg[%d] = '%s'\n", i, args[i]);
+		free(line);
+	}
+	return (0);
 }
