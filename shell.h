@@ -12,8 +12,10 @@
 #include <sys/stat.h>
 #include <signal.h>
 
+#define BUFFER_SIZE 1024
+
 extern char **environ;
 
-int _strlen(char *str);
+
 
 #endif /* SHELL_H */
