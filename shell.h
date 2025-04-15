@@ -1,8 +1,6 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-#ifndef SHELL_H
-#define SHELL_H
 
 #include <string.h>
 #include <unistd.h>
@@ -23,4 +21,3 @@ extern char **environ;
 
 #endif /* SHELL_H */
 
-#endif /* SHELL_H */
