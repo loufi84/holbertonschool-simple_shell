@@ -72,9 +72,8 @@ int split_string(char *string, char *array[])
 */
 void exit(int status)
 {
-	/* Optionnel : afficher ou logger quelque chose avant de quitter*/
-	write(STDOUT_FILENO, "Fermeture du programme\n", 24);
+	const char *msg = "Fermeture du programme\n";
 
-	/* Termine immédiatement le programme, sans nettoyer*/
+	write(STDOUT_FILENO, msg, strlen(msg));
 	_exit(status);
 }
