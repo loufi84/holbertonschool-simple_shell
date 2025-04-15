@@ -13,9 +13,12 @@
 #include <signal.h>
 
 #define BUFFER_SIZE 1024
+#define MAX_ARGS 64
 
 extern char **environ;
 
+int split_string(char *string, char *array[]);
+char *read_line(void);
 
 
 #endif /* SHELL_H */
