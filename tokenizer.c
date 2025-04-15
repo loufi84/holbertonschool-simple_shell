@@ -6,9 +6,9 @@
 * Return: the line read
 */
 
-char read_line(void)
+char *read_line(void)
 {
-	char line = NULL;
+	char *line = NULL;
 	size_t len = 0;
 	ssize_t whole_line;
 
@@ -34,23 +34,24 @@ char read_line(void)
  * Return: a NULL-terminated array of tokens (words), or NULL on failure
  */
 
-char *split_string(char *string, char *array[])
+int split_string(char *string, char *array[])
 {
 	int i = 0;
 	char *token;
-	char *delim = " \n\t";
+	char *delim = " \t\n";
 
 	if (string == NULL)
-		return (NULL);
+		return (0);
 
 	token = strtok(string, delim);
 
-	for (i = 0; i != '\0'; i++)
+	while (token && i < MAX_ARGS - 1)
 	{
+		array[i++] = token;
 		token = strtok(NULL, delim);
 	}
 
 	array[i] = NULL;
 
-	return (array[i]);
+	return (i);
 }
