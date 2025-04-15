@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 /**
 *  read_line - prints a prompt (takes input and prints it)
@@ -9,6 +13,7 @@
 char *read_line(void)
 {
 	char *line = NULL;
+
 	size_t len = 0;
 	ssize_t whole_line;
 
@@ -27,17 +32,19 @@ char *read_line(void)
 }
 
 /**
- * split_string - splits a string into tokens using spaces as delimiter
- * @string: the input string to split
- * @array: array to put the tokens in
- *
- * Return: a NULL-terminated array of tokens (words), or NULL on failure
- */
+* split_string - splits a string into tokens using spaces as delimiter
+* @string: the input string to split
+* @array: array to put the tokens in
+*
+* Return: a NULL-terminated array of tokens (words), or NULL on failure
+*/
 
 int split_string(char *string, char *array[])
 {
 	int i = 0;
+
 	char *token;
+
 	char *delim = " \t\n";
 
 	if (string == NULL)
@@ -54,4 +61,20 @@ int split_string(char *string, char *array[])
 	array[i] = NULL;
 
 	return (i);
+}
+
+/**
+* exit - simulation de la fonction exit standard
+* @status: code de sortie à retourner à l’OS
+*
+* Cette version affiche le code de sortie, flush stdout,
+* et termine le programme immédiatement avec _exit().
+*/
+void exit(int status)
+{
+	/* Optionnel : afficher ou logger quelque chose avant de quitter*/
+	write(STDOUT_FILENO, "Fermeture du programme\n", 24);
+
+	/* Termine immédiatement le programme, sans nettoyer*/
+	_exit(status);
 }
