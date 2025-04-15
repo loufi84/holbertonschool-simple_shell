@@ -1,8 +1,4 @@
 #include "shell.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 /**
 *  read_line - prints a prompt (takes input and prints it)
@@ -70,10 +66,19 @@ int split_string(char *string, char *array[])
 * Cette version affiche le code de sortie, flush stdout,
 * et termine le programme immédiatement avec _exit().
 */
-void exit(int status)
+void shutdown(void)
 {
-	const char *msg = "Fermeture du programme\n";
+	printf("fin du programme");
+	exit(EXIT_SUCCESS);
+}
 
-	write(STDOUT_FILENO, msg, strlen(msg));
-	_exit(status);
+void print_env(void)
+{
+	int i = 0;
+
+	while (environ[i])
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
 }
