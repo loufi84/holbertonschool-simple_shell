@@ -45,7 +45,6 @@ int main(void)
 			wait(&status);
 
 		for (int i = 0; args[i] != NULL; i++)
-			free(args[i]);
 		free(line);
 	}
 	return (0);
