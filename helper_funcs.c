@@ -64,7 +64,7 @@ int split_string(char *string, char *array[])
 */
 void shutdown(void)
 {
-	printf("Merci d'avoir utilisé notre programme ฅ^•ﻌ•^ฅ");
+	printf("Merci d'avoir utilisé notre programme ฅ^•ﻌ•^ฅ\n");
 	exit(EXIT_SUCCESS);
 }
 
