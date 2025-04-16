@@ -39,7 +39,6 @@ int main(void)
 		else
 			wait(&status);
 		free(line);
-		free(args);
 	}
 	return (0);
 }
