@@ -19,6 +19,7 @@ extern char **environ;
 
 int split_string(char *string, char *array[]);
 char *read_line(void);
-
+void shutdown(void);
+void print_env(void);
 
 #endif /* SHELL_H */
