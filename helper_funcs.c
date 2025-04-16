@@ -60,17 +60,17 @@ int split_string(char *string, char *array[])
 }
 
 /**
-* exit - simulation de la fonction exit standard
-* @status: code de sortie à retourner à l’OS
-*
-* Cette version affiche le code de sortie, flush stdout,
-* et termine le programme immédiatement avec _exit().
+* shutdown - This function exits the Shell
 */
 void shutdown(void)
 {
-	printf("fin du programme");
+	printf("Merci d'avoir utilisé notre programme ฅ^•ﻌ•^ฅ");
 	exit(EXIT_SUCCESS);
 }
+
+/**
+ * print_env - This function prints the current environment
+ */
 
 void print_env(void)
 {
