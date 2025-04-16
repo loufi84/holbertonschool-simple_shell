@@ -9,6 +9,7 @@
 char *read_line(void)
 {
 	char *line = NULL;
+
 	size_t len = 0;
 	ssize_t whole_line;
 
@@ -27,17 +28,19 @@ char *read_line(void)
 }
 
 /**
- * split_string - splits a string into tokens using spaces as delimiter
- * @string: the input string to split
- * @array: array to put the tokens in
- *
- * Return: a NULL-terminated array of tokens (words), or NULL on failure
- */
+* split_string - splits a string into tokens using spaces as delimiter
+* @string: the input string to split
+* @array: array to put the tokens in
+*
+* Return: a NULL-terminated array of tokens (words), or NULL on failure
+*/
 
 int split_string(char *string, char *array[])
 {
 	int i = 0;
+
 	char *token;
+
 	char *delim = " \t\n";
 
 	if (string == NULL)
@@ -54,4 +57,28 @@ int split_string(char *string, char *array[])
 	array[i] = NULL;
 
 	return (i);
+}
+
+/**
+* shutdown - This function exits the Shell
+*/
+void shutdown(void)
+{
+	printf("Merci d'avoir utilisé notre programme ฅ^•ﻌ•^ฅ\n");
+	exit(EXIT_SUCCESS);
+}
+
+/**
+ * print_env - This function prints the current environment
+ */
+
+void print_env(void)
+{
+	int i = 0;
+
+	while (environ[i])
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
 }

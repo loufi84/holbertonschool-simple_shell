@@ -1,16 +1,17 @@
 #include "shell.h"
 
 /**
- * main - Entry point
- *
- * Return: 0 for success, various errors
- */
+* main - Entry point
+*
+* Return: 0 for success, various errors
+*/
 
 int main(void)
 {
 	pid_t pid;
 	int status;
-	char *line, **args[MAX_ARGS];
+
+	char *line, *args[MAX_ARGS];
 
 	while (1)
 	{
@@ -30,14 +31,19 @@ int main(void)
 		if (pid < 0)
 		{
 			perror("fork failed");
+			free(line);
 			continue;
 		}
 		if (pid == 0)
 		{
-
+			/* exécute la commande*/
+			execvp(args[0], args);
+			perror("exec failed");
+			exit(EXIT_FAILURE);
 		}
 		else
 			wait(&status);
+
 		free(line);
 	}
 	return (0);

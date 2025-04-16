@@ -19,6 +19,22 @@ extern char **environ;
 
 int split_string(char *string, char *array[]);
 char *read_line(void);
+void shutdown(void);
+void print_env(void);
+int built_in(char *cmd);
 
+/**
+ * struct builtin_s - A simple structure to store the built_in
+ *						functions of the Shell
+ *
+ * @name: The name of the function
+ * @func: A pointer to the function to be called
+ */
+
+typedef struct builtin_s
+{
+	char *name;
+	void (*func)(void);
+} builtin_t;
 
 #endif /* SHELL_H */
