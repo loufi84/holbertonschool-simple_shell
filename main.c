@@ -31,16 +31,21 @@ int main(void)
 		if (pid < 0)
 		{
 			perror("fork failed");
+			free(line);
 			continue;
 		}
 		if (pid == 0)
 		{
-
+			/* exécute la commande*/
+			execvp(args[0], args);
+			perror("exec failed");
+			exit(EXIT_FAILURE);
 		}
 		else
 			wait(&status);
+
+		for (int i = 0; args[i] != NULL; i++)
 		free(line);
-		free(args);
 	}
 	return (0);
 }
