@@ -103,16 +103,13 @@ void run_cmd(char *args[])
 	if (pid == 0)
 	{
 		execve(cmd, args, environ);
-		if (execve == -1)
-		{
-			perror("execve");
-			exit(EXIT_FAILURE);
-		}
+		perror("execve");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
 	}
 
-	return (0);
+	return;
 }

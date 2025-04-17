@@ -10,7 +10,11 @@
 int main() {
     char line[MAX_LINE];
     char *args[MAX_ARGS];
-    char *envp[] = { NULL }; = Environnement minimal
+    char *envp[] = { /* Environnement minimal*/
+        "PATH=/usr/bin",
+        "HOME=/home/user",
+        NULL
+     };
 
     printf("Entrez une commande avec son chemin complet (ex: /bin/ls -l): ");
     if (fgets(line, sizeof(line), stdin) == NULL) {
