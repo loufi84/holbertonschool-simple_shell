@@ -19,7 +19,6 @@ char *read_line(void)
 	if (whole_line == -1) /*EOF, (Ctrl+D) or error*/
 	{
 		printf("\n");
-		free(line);
 		return (NULL);
 	}
 
@@ -37,24 +36,18 @@ char *read_line(void)
 char *split_string(char *string, char *array[])
 {
 	int i = 0;
-	char *token;
-	char *delim = " \t\n:";
-	static char buffer[BUFFER_SIZE];
+	char *token, *delim = " \t\n";
 
 	if (string == NULL)
 		return (NULL);
 
-	strncpy(buffer, string, BUFFER_SIZE  - 1);
-	buffer[BUFFER_SIZE - 1] = '\0';
+	token = strtok(string, delim);
 
-	token = strtok(buffer, delim);
-
-	while (token && i < MAX_ARGS - 1)
+	while (token != NULL && i < MAX_ARGS - 1)
 	{
 		array[i++] = token;
 		token = strtok(NULL, delim);
 	}
-
 	array[i] = NULL;
 
 	return (array[0]);
@@ -95,6 +88,9 @@ void run_cmd(char *args[])
 	int status;
 	pid_t pid = fork();
 
+	if (args == NULL || args[0] == NULL)
+		return;
+
 	if (pid == -1)
 	{
 		perror("fork");
@@ -104,8 +100,10 @@ void run_cmd(char *args[])
 	if (pid == 0)
 	{
 		path_handling(args);
+		if (args[0] == NULL)
+			exit(EXIT_FAILURE);
 		execve(args[0], args, environ);
-		perror("execve");
+		perror(args[0]);
 		exit(EXIT_FAILURE);
 	}
 	else

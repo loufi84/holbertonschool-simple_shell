@@ -22,7 +22,7 @@ int what_is_cmd(char **cmd)
 		return (-1);
 	}
 
-	for (i = 0; i < 3; i++)
+	for (i = 0; verif[i].name != NULL; i++)
 	{/*If cmd is a built-in, call the correct function*/
 		if (strcmp(verif[i].name, cmd[0]) == 0)
 		{
@@ -35,12 +35,12 @@ int what_is_cmd(char **cmd)
 	{/*If path exists and if it's executable, execute the input*/
 		if (access(cmd[0], F_OK) == 0 && access(cmd[0], X_OK) == 0)
 		{
-			execve(cmd[0], cmd, environ);
-			return (0);
+			return (-1);
 		}
 
 		else
 		{
+			perror(cmd[0]);
 			return (-1);
 		}
 	}

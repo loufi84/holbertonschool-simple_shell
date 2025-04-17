@@ -1,41 +1,68 @@
 #include "shell.h"
 
 /**
-* path_handling - handles the path if not absolute
-* @cmd: an array of tokens (= input)
-*
-* Return: 0 in success, -1 in failure
-*/
+ * path_error - Helper function that handles the inability to find a command
+ *
+ * @args: A pointer to the array of commands
+ */
 
-int path_handling(char **cmd)
+void path_error(char *args)
 {
-	static char buffer[BUFFER_SIZE];
-	char *dir[MAX_ARGS];
-	char *path_env = getenv("PATH");
-	char *full_path = split_string(path_env, dir);/*Look for the path*/
-	int i = 0;
+	fprintf(stderr, "%s: command not found\n", args);
+}
 
-	if (cmd == NULL || *cmd == NULL)/*Check if pointers are valid*/
+/**
+ * alloc_error - Helper function that handle allocation error
+ *
+ * @cmd: The pointer to the command to reinitialize
+ */
+
+void alloc_error(char *cmd)
+{
+	cmd = NULL;
+}
+
+/**
+ * path_handling - Resolves command path using PATH env variable
+ * @cmd: Array containing command and arguments
+ */
+void path_handling(char **cmd)
+{
+	char *path_env, *path_copy, *new_cmd, *dirs[BUFFER_SIZE];
+	char full_path[BUFFER_SIZE];
+	int i, found = 0;
+
+	if (!cmd || !cmd[0])
+		return;
+	if (strchr(cmd[0], '/'))
 	{
-		return (-1);
+		if (access(cmd[0], F_OK | X_OK) == 0)
+			return;
+		fprintf(stderr, "command not found: %s\n", cmd[0]);
+		cmd[0] = NULL;
+		return;
 	}
+	path_env = getenv("PATH");
+	if (!path_env || !*path_env)
+		path_error(cmd[0]);
 
-	/*Check if PATH is absent or here but empty*/
-	if (path_env == NULL || path_env[0] == '\0')
+	path_copy = strdup(path_env);
+	if (!path_copy)
+		alloc_error(cmd[0]);
+
+	split_path(path_copy, dirs);
+	for (i = 0; dirs[i] && !found; i++)
 	{
-		return (-1);
+		sprintf(full_path, "%s/%s", dirs[i], cmd[0]);
+		if (access(full_path, F_OK | X_OK) == -1)
+			continue;
+		new_cmd = strdup(full_path);
+		if (!new_cmd)
+			break;
+		cmd[0] = new_cmd;
+		found = 1;
 	}
-
-	while (dir[i] != NULL)
-	{
-		sprintf(buffer, "%s%s", dir[i], cmd[0]);
-
-		if (access(buffer, F_OK) == 0 && access(buffer, X_OK) == 0)
-		{
-			cmd[0] = buffer;
-			return (0);
-		}
-		i++;
-	}
-	return (-1);
+	free(path_copy);
+	if (found)
+		return;
 }

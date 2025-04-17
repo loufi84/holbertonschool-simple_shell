@@ -36,8 +36,9 @@ char *read_line(void);
 void shutdown(void);
 void print_env(void);
 int built_in(char *cmd);
-int path_handling(char **cmd);
+void path_handling(char **cmd);
 void run_cmd(char *args[]);
 int what_is_cmd(char **cmd);
+char *split_path(char *string, char *array[]);
 
 #endif /* SHELL_H */
