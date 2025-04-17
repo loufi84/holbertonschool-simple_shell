@@ -15,63 +15,29 @@
 #define BUFFER_SIZE 1024
 #define MAX_ARGS 64
 
+/**
+ * struct builtin_s - A simple structure to store the built_in
+ *						functions of the Shell
+ *
+ * @name: The name of the function
+ * @func: A pointer to the function to be called
+ */
+
+typedef struct builtin_s
+{
+	char *name;
+	void (*func)(void);
+} builtin_t;
+
 extern char **environ;
 
-int split_string(char *string, char *array[]);
+char *split_string(char *string, char *array[]);
 char *read_line(void);
 void shutdown(void);
 void print_env(void);
 int built_in(char *cmd);
-
-/**
- * struct builtin_s - A simple structure to store the built_in
- *						functions of the Shell
- *
- * @name: The name of the function
- * @func: A pointer to the function to be called
- */
-
-typedef struct builtin_s
-{
-	char *name;
-	void (*func)(void);
-} builtin_t;
-
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <signal.h>
-
-#define BUFFER_SIZE 1024
-#define MAX_ARGS 64
-
-extern char **environ;
-
-int split_string(char *string, char *array[]);
-char *read_line(void);
-void shutdown(void);
-void print_env(void);
-int what_is_cmd(char **cmd);
 int path_handling(char **cmd);
-
-/**
- * struct builtin_s - A simple structure to store the built_in
- *						functions of the Shell
- *
- * @name: The name of the function
- * @func: A pointer to the function to be called
- */
-
-typedef struct builtin_s
-{
-	char *name;
-	void (*func)(void);
-} builtin_t;
+void run_cmd(char *args[]);
+int what_is_cmd(char **cmd);
 
 #endif /* SHELL_H */

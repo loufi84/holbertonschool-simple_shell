@@ -34,7 +34,7 @@ char *read_line(void)
 * Return: a NULL-terminated array of tokens (words), or NULL on failure
 */
 
-int split_string(char *string, char *array[])
+char *split_string(char *string, char *array[])
 {
 	int i = 0;
 
@@ -43,7 +43,7 @@ int split_string(char *string, char *array[])
 	char *delim = " \t\n";
 
 	if (string == NULL)
-		return (0);
+		return (NULL);
 
 	token = strtok(string, delim);
 
@@ -55,7 +55,7 @@ int split_string(char *string, char *array[])
 
 	array[i] = NULL;
 
-	return (i);
+	return (array[i]);
 }
 
 /**
@@ -102,8 +102,9 @@ void run_cmd(char *args[])
 
 	if (pid == 0)
 	{
+		path_handling(args);
 		execve(cmd, args, environ);
-		if (execve == -1)
+		if (execve(cmd, args, environ) == -1)
 		{
 			perror("execve");
 			exit(EXIT_FAILURE);
@@ -114,5 +115,4 @@ void run_cmd(char *args[])
 		waitpid(pid, &status, 0);
 	}
 
-	return (0);
 }

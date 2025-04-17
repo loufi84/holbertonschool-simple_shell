@@ -12,7 +12,7 @@ int path_handling(char **cmd)
 	static char buffer[BUFFER_SIZE];
 	char **dir;
 	char *path_env = getenv("PATH");
-	int full_path = split_string(path_env, dir);/*Look for the path*/
+	char *full_path = split_string(path_env, dir);/*Look for the path*/
 	int i = 0;
 
 	if (cmd == NULL || *cmd == NULL)/*Check if pointers are valid*/

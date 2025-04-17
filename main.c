@@ -11,7 +11,7 @@ int main(void)
 	pid_t pid;
 	int status;
 
-	char *line, *args[MAX_ARGS];
+	char *line, *args[MAX_ARGS], *cmd;
 
 	while (1)
 	{
@@ -27,7 +27,11 @@ int main(void)
 			free(line);
 			continue;
 		}
-
+		cmd = split_string(line, args);
+		if (what_is_cmd(&cmd) != 0)
+		{
+			run_cmd(&cmd);
+		}
 		free(line);
 	}
 	return (0);
