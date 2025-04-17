@@ -27,22 +27,6 @@ int main(void)
 			free(line);
 			continue;
 		}
-		pid = fork();
-		if (pid < 0)
-		{
-			perror("fork failed");
-			free(line);
-			continue;
-		}
-		if (pid == 0)
-		{
-			/* exécute la commande*/
-			execvp(args[0], args);
-			perror("exec failed");
-			exit(EXIT_FAILURE);
-		}
-		else
-			wait(&status);
 
 		free(line);
 	}
