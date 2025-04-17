@@ -32,7 +32,7 @@ int path_handling(char **cmd)
 
 		if (access(buffer, F_OK) && access(buffer, X_OK))
 		{
-			return (buffer);
+			return (0);
 		}
 
 		else

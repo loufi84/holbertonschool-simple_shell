@@ -22,7 +22,8 @@ int split_string(char *string, char *array[]);
 char *read_line(void);
 void shutdown(void);
 void print_env(void);
-int is_built_in(char **cmd);
+int what_is_cmd(char **cmd);
+int path_handling(char **cmd);
 
 /**
  * struct builtin_s - A simple structure to store the built_in
