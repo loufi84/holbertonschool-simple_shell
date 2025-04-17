@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
-* is_built_in - check if the command is an absolute path or a built_in
+* what_is_cmd - check if the command is an absolute path or a built_in
 * @cmd: an array of tokens (= input)
 *
 * Return: 0 in success, -1 in failure
 */
 
-int is_built_in(char **cmd)
+int what_is_cmd(char **cmd)
 {
 	builtin_t *verif;
 	int i = 0;

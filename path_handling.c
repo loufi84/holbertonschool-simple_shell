@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
-* handling_path - handles the path if not absolute
+* path_handling - handles the path if not absolute
 * @cmd: an array of tokens (= input)
 *
 * Return: 0 in success, -1 in failure
 */
 
-int handling_path(char **cmd)
+int path_handling(char **cmd)
 {
 	static char buffer[BUFFER_SIZE];
 	char **dir;
