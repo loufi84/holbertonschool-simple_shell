@@ -37,15 +37,17 @@ char *read_line(void)
 char *split_string(char *string, char *array[])
 {
 	int i = 0;
-
 	char *token;
-
-	char *delim = " \t\n";
+	char *delim = " \t\n:";
+	static char buffer[BUFFER_SIZE];
 
 	if (string == NULL)
 		return (NULL);
 
-	token = strtok(string, delim);
+	strncpy(buffer, string, BUFFER_SIZE  - 1);
+	buffer[BUFFER_SIZE - 1] = '\0';
+
+	token = strtok(buffer, delim);
 
 	while (token && i < MAX_ARGS - 1)
 	{
@@ -55,7 +57,7 @@ char *split_string(char *string, char *array[])
 
 	array[i] = NULL;
 
-	return (array[i]);
+	return (array[0]);
 }
 
 /**
@@ -90,7 +92,6 @@ void print_env(void)
 
 void run_cmd(char *args[])
 {
-	char *cmd = args[0];
 	int status;
 	pid_t pid = fork();
 
@@ -103,12 +104,9 @@ void run_cmd(char *args[])
 	if (pid == 0)
 	{
 		path_handling(args);
-		execve(cmd, args, environ);
-		if (execve(cmd, args, environ) == -1)
-		{
-			perror("execve");
-			exit(EXIT_FAILURE);
-		}
+		execve(args[0], args, environ);
+		perror("execve");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
