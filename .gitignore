@@ -5,3 +5,5 @@ shell
 simple_shell
 in_path.c
 built_in.c
+*.sh
+tests
