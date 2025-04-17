@@ -61,8 +61,9 @@ int split_string(char *string, char *array[])
 /**
 * shutdown - This function exits the Shell
 */
-void shutdown(void)
+void shutdown(char **args)
 {
+	(void)args; /* Evite un warning si non utilisé*/
 	printf("Merci d'avoir utilisé notre programme ฅ^•ﻌ•^ฅ\n");
 	exit(EXIT_SUCCESS);
 }
@@ -71,8 +72,9 @@ void shutdown(void)
  * print_env - This function prints the current environment
  */
 
-void print_env(void)
+void print_env(char **args)
 {
+	(void)args;
 	int i = 0;
 
 	while (environ[i])
@@ -112,4 +114,28 @@ void run_cmd(char *args[])
 	}
 
 	return;
+}
+void cd_builtin(char *args[])
+{
+	char *path = NULL;
+
+	/* Si un argument est donné (cd/home)*/
+	if (args[1])
+		path = args[1];
+	else
+		path = getenv("HOME"); /* Otherwise on va dans le repertoir home*/
+
+	change_directory(path);
+}
+int change_directory(char *path)
+{
+	if (path == NULL)
+		path = getenv("HOME");
+
+	if (chdir(path) != 0)
+	{
+		perror("cd failed");
+		return (1);
+	}
+	return 0;
 }

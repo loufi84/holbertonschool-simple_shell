@@ -19,9 +19,11 @@ extern char **environ;
 
 int split_string(char *string, char *array[]);
 char *read_line(void);
-void shutdown(void);
-void print_env(void);
-int built_in(char *cmd);
+void shutdown(char **args);
+void print_env(char **args);
+int built_in(char *cmd, char **args);
+void cd_builtin(char *args[]);
+int change_directory(char *path);
 
 /**
  * struct builtin_s - A simple structure to store the built_in
@@ -34,7 +36,7 @@ int built_in(char *cmd);
 typedef struct builtin_s
 {
 	char *name;
-	void (*func)(void);
+	void (*func)(char **args);
 } builtin_t;
 
 #endif /* SHELL_H */

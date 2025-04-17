@@ -8,11 +8,12 @@
  * Return: 1 if built_in, 0 otherwise
  */
 
-int built_in(char *cmd)
+int built_in(char *cmd, char **args)
 {
 	builtin_t builtins[] = {
 	{"exit", shutdown},
 	{"env", print_env},
+	{"cd", cd_builtin},
 	{NULL, NULL}
 	};
 	int i;
@@ -21,7 +22,7 @@ int built_in(char *cmd)
 	{
 		if (strcmp(cmd, builtins[i].name) == 0)
 		{
-			builtins[i].func();
+			builtins[i].func(args);
 			return (1);
 		}
 	}
