@@ -22,15 +22,14 @@ int main(void)
 		line = read_line();
 		if (line == NULL)
 			break;
-		if (split_string(line, args) == 0)
+		if (split_string(line, args) == NULL || args[0] == NULL)
 		{
 			free(line);
 			continue;
 		}
-		cmd = split_string(line, args);
-		if (what_is_cmd(&cmd) != 0)
+		if (what_is_cmd(args) != 0)
 		{
-			run_cmd(&cmd);
+			run_cmd(args);
 		}
 		free(line);
 	}

@@ -10,7 +10,7 @@
 int path_handling(char **cmd)
 {
 	static char buffer[BUFFER_SIZE];
-	char **dir;
+	char *dir[MAX_ARGS];
 	char *path_env = getenv("PATH");
 	char *full_path = split_string(path_env, dir);/*Look for the path*/
 	int i = 0;
@@ -26,22 +26,16 @@ int path_handling(char **cmd)
 		return (-1);
 	}
 
-	while (full_path)
+	while (dir[i] != NULL)
 	{
-		sprintf(buffer, "%s", *cmd);
+		sprintf(buffer, "%s%s", dir[i], cmd[0]);
 
-		if (access(buffer, F_OK) && access(buffer, X_OK))
+		if (access(buffer, F_OK) == 0 && access(buffer, X_OK) == 0)
 		{
+			cmd[0] = buffer;
 			return (0);
 		}
-
-		else
-		{
-			return (-1);
-		}
-
 		i++;
 	}
-
-	return (0);
+	return (-1);
 }

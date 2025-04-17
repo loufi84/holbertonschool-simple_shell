@@ -9,7 +9,11 @@
 
 int what_is_cmd(char **cmd)
 {
-	builtin_t *verif;
+	builtin_t verif[] = {
+		{"exit", shutdown},
+		{"env", print_env},
+		{NULL, NULL}
+	};
 	int i = 0;
 	char *path_env = getenv("PATH");
 
@@ -18,22 +22,21 @@ int what_is_cmd(char **cmd)
 		return (-1);
 	}
 
-	while (verif != NULL)
+	for (i = 0; i < 3; i++)
 	{/*If cmd is a built-in, call the correct function*/
 		if (strcmp(verif[i].name, cmd[0]) == 0)
 		{
 			verif[i].func();
 			return (0);
 		}
-
-		i++;
 	}
 
-	if (strcmp(cmd[0], "/") == 0)/*Check if cmd is an absolute path*/
+	if (cmd[0][0] == '/')/*Check if cmd is an absolute path*/
 	{/*If path exists and if it's executable, execute the input*/
-		if (access(path_env, F_OK) && access(path_env, X_OK))
+		if (access(cmd[0], F_OK) == 0 && access(cmd[0], X_OK) == 0)
 		{
-			execve(path_env, cmd, environ);
+			execve(cmd[0], cmd, environ);
+			return (0);
 		}
 
 		else
