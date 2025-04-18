@@ -1,7 +1,44 @@
 # holbertonschool-simple_shell
 <img align="center" alt="What the Shell GIF" width="1000" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNG5wNHRhc3ZvandqbzdoaWpmYzRndGQwcW4zZWw5YndjOXlpb3E1ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jlcqOX60nkPvzAfkZM/giphy.gif">
  
- The repo for Holberton Simple Shell
-This is a placeholder for now
+ 
+# A Simple Shell project
+
+A Shell is an computer programm that gives an interface to the users to access to operating system services.
+It allows the users to communicate with the exploitation system kernel to execute commands, run programs, manage files and processes, and automate tasks.
+
+This project is a simple implementation of this interface, reproducing a few functions of it.
+## 🖥️Informations
+
+This project was compiled with $ gcc -Wall -Werror -Wextra -pedantic *.c -o Shell on Ubuntu 20.04 LTS.
+
+It is fully written in Betty coding standards.
+
+
+## 🚀 Installation
+
+First, be sure to have:
+ - GCC installed on your system.
+ - Ubuntu 20.04 LTS (or equivalent).
+
+This program was designed for Linux systems. It was tested functionnal on a Mac M2 (Apple Silicon) and can cause segmentation fault with this architecture.
+
+You can install the simple shell by cloning this repo:
+https://github.com/loufi84/holbertonschool-simple_shell
+
+Next you can compile the files with this command:
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o Shell
+
+Finally you can run our Shell writing:
+./Shell
+
+
+## 🧑‍💻Authors
+
+- [Quentin Lataste](https://github.com/loufi84)
+- [Delphine Coutouly-Laborda](https://github.com/Delphes1980)
+- [Arnaud Lanoizele](https://github.com/arnaudlanoizele)
+- [Chris Sodji Aleka](https://github.com/)
+
 
 ![Flowchart](https://github.com/loufi84/holbertonschool-simple_shell/blob/Features/Simple%20Shell%20flowchart.png)
