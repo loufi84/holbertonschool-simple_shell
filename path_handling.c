@@ -21,7 +21,8 @@ void path_error(char *args, char *path)
 
 void alloc_error(char *cmd)
 {
-	cmd = NULL;
+	fprintf(stderr, "alloc failed for %s\n", cmd);
+	exit(EXIT_FAILURE);
 }
 
 /**
