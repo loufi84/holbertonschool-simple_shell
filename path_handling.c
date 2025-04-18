@@ -4,11 +4,13 @@
  * path_error - Helper function that handles the inability to find a command
  *
  * @args: A pointer to the array of commands
+ * @path: Pointer to the path using _getenv
  */
 
-void path_error(char *args)
+void path_error(char *args, char *path)
 {
 	fprintf(stderr, "%s: command not found\n", args);
+	free(path);
 }
 
 /**
@@ -42,9 +44,9 @@ void path_handling(char **cmd)
 		cmd[0] = NULL;
 		return;
 	}
-	path_env = getenv("PATH");
+	path_env = _getenv("PATH");
 	if (!path_env || !*path_env)
-		path_error(cmd[0]);
+		path_error(cmd[0], path_env);
 
 	path_copy = strdup(path_env);
 	if (!path_copy)
@@ -63,6 +65,7 @@ void path_handling(char **cmd)
 		found = 1;
 	}
 	free(path_copy);
+	free(path_env);
 	if (found)
 		return;
 }
