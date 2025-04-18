@@ -40,5 +40,10 @@ void path_handling(char **cmd);
 void run_cmd(char *args[]);
 int what_is_cmd(char **cmd);
 char *split_path(char *string, char *array[]);
+char *_getenv(const char *name);
+void path_error(char *args, char *path);
+void alloc_error(char *cmd);
+
+
 
 #endif /* SHELL_H */
