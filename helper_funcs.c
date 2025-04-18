@@ -9,7 +9,6 @@
 char *read_line(void)
 {
 	char *line = NULL;
-
 	size_t len = 0;
 	ssize_t whole_line;
 
@@ -18,8 +17,10 @@ char *read_line(void)
 
 	if (whole_line == -1) /*EOF, (Ctrl+D) or error*/
 	{
-		printf("\n");
 		free(line);
+		line = NULL;
+		len = 0;
+		printf("\n");
 		return (NULL);
 	}
 	return (line);
