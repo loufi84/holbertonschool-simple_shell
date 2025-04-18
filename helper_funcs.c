@@ -19,9 +19,10 @@ char *read_line(void)
 	if (whole_line == -1) /*EOF, (Ctrl+D) or error*/
 	{
 		printf("\n");
+		free(line);
 		return (NULL);
 	}
-
+	free(line);
 	return (line);
 }
 
