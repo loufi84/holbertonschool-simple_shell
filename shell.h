@@ -43,7 +43,7 @@ char *split_path(char *string, char *array[]);
 char *_getenv(const char *name);
 void path_error(char *args, char *path);
 void alloc_error(char *cmd);
-
+void comments_handling(char *line);
 
 
 #endif /* SHELL_H */

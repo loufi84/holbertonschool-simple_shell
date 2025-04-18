@@ -19,6 +19,9 @@ int main(void)
 		line = read_line();
 		if (line == NULL)
 			break;
+
+		comments_handling(line);
+
 		if (split_string(line, args) == NULL || args[0] == NULL)
 			continue;
 		if (what_is_cmd(args) != 0)
