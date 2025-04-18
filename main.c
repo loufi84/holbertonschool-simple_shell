@@ -19,7 +19,6 @@ int main(void)
 		line = read_line();
 		if (line == NULL)
 		{
-			free(line);
 			break;
 		}
 		if (split_string(line, args) == NULL || args[0] == NULL)
