@@ -45,6 +45,7 @@ char *_getenv(const char *name);
 void path_error(char *args, char *path);
 void alloc_error(char *cmd);
 ssize_t _getline(char **lineptr, size_t *n, int fd);
+void comments_handling(char *line);
 
 
 #endif /* SHELL_H */
