@@ -32,6 +32,8 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o Shell
 Finally you can run our Shell writing:
 ./Shell
 
+![Flowchart](https://github.com/loufi84/holbertonschool-simple_shell/blob/Features/Simple%20Shell%20flowchart.png)
+
 
 ## 🧑‍💻Authors
 
@@ -40,5 +42,3 @@ Finally you can run our Shell writing:
 - [Arnaud Lanoizele](https://github.com/arnaudlanoizele)
 - [Chris Sodji Aleka](https://github.com/)
 
-
-![Flowchart](https://github.com/loufi84/holbertonschool-simple_shell/blob/Features/Simple%20Shell%20flowchart.png)
