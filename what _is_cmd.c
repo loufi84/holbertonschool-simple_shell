@@ -15,7 +15,6 @@ int what_is_cmd(char **cmd)
 		{NULL, NULL}
 	};
 	int i = 0;
-	char *path_env = getenv("PATH");
 
 	if (cmd == NULL || *cmd == NULL)/*Check if pointers are valid*/
 	{

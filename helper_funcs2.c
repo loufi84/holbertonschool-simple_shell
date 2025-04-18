@@ -1,5 +1,14 @@
 #include "shell.h"
 
+/**
+ * split_path - A function to split path of PATH
+ *
+ * @string: Pointer to the user's input
+ * @array: Pointer to array containing the PATH
+ *
+ * Return: First directory of PATH
+ */
+
 char *split_path(char *string, char *array[])
 {
 	int i = 0;

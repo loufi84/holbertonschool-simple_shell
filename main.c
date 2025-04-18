@@ -8,10 +8,7 @@
 
 int main(void)
 {
-	pid_t pid;
-	int status;
-
-	char *line, *args[MAX_ARGS], *cmd;
+	char *line, *args[MAX_ARGS];
 
 	while (1)
 	{
