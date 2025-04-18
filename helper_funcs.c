@@ -13,7 +13,7 @@ char *read_line(void)
 	ssize_t whole_line;
 
 
-	whole_line = getline(&line, &len, stdin);/*Read user input*/
+	whole_line = _getline(&line, &len, 0);/*Read user input*/
 
 	if (whole_line == -1) /*EOF, (Ctrl+D) or error*/
 	{

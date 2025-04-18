@@ -13,6 +13,7 @@
 #include <signal.h>
 
 #define BUFFER_SIZE 1024
+#define INIT_BUF_SIZE 128
 #define MAX_ARGS 64
 
 /**
@@ -43,6 +44,7 @@ char *split_path(char *string, char *array[]);
 char *_getenv(const char *name);
 void path_error(char *args, char *path);
 void alloc_error(char *cmd);
+ssize_t _getline(char **lineptr, size_t *n, int fd);
 void comments_handling(char *line);
 
 
