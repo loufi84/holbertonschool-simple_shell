@@ -18,19 +18,11 @@ int main(void)
 
 		line = read_line();
 		if (line == NULL)
-		{
 			break;
-		}
 		if (split_string(line, args) == NULL || args[0] == NULL)
-		{
-			free(line);
 			continue;
-		}
 		if (what_is_cmd(args) != 0)
-		{
 			run_cmd(args);
-		}
-		free(line);
 	}
 	return (0);
 }
