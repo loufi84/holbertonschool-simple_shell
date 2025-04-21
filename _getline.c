@@ -1,5 +1,15 @@
 #include "shell.h"
 
+/**
+ * expand_buffer - A function that expands the buffer if needed
+ *
+ * @buf: The buffer to modify
+ * @bufsize: The size of the buffer to modify
+ * @pos: The position inside the string
+ *
+ * Return: A pointer to the new buffer
+ */
+
 static char *expand_buffer(char *buf, size_t *bufsize, size_t pos)
 {
 	size_t new_size;
@@ -17,6 +27,16 @@ static char *expand_buffer(char *buf, size_t *bufsize, size_t pos)
 	*bufsize = new_size;
 	return (new_buf);
 }
+
+/**
+ * _getline - A function to mimic getline function
+ *
+ * @lineptr: A pointer to the place to write the line
+ * @n: A pointer to the size of the line
+ * @fd: The file descriptor to which we read the line
+ *
+ * Return: The number of bytes read
+ */
 
 ssize_t _getline(char **lineptr, size_t *n, int fd)
 {
