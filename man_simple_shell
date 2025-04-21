@@ -1,0 +1,35 @@
+.TH Shell "2025-04-21" "Version 1.0"
+.SH NAME
+Shell \- computer program implementation
+
+.SH SYNOPSIS
+.B ./Shell
+
+.SH DESCRIPTION
+The Shell refers to a type of Command Line Interface, used to interact
+with a Unix or Unix-like system. Shell provides a text-based environment
+in which users can enter commands to perform specific tasks. The user
+gives instructions in text form, which the system interprets and executes.
+The Shell can then launch programs, manage files and directories, redirect
+command output, or create automation scripts.
+
+Shell command syntax generally follows a standard pattern. However,
+variations may occur for very specific commands or advanced options. The
+command to be executed is the first element of the line. This may be the
+name of the program or function you wish to call.
+
+For some commands, behavioral modifications can be made by adding options.
+These are preceded by a dash (- ) or two dashes (-). Information or
+arguments can also be added to the command. 
+
+.B Interactive mode
+The shell displays a prompt and waits for the user to enter commands
+manually from keyboard.
+
+.B Non-interactive mode
+The shell executes commands automatically from a script, pipe or
+redirection, without direct interaction with the user.
+
+.SH RETURN VALUE
+
+
