@@ -15,9 +15,10 @@ static char *expand_buffer(char *buf, size_t *bufsize, size_t pos)
 	size_t new_size;
 	char *new_buf;
 
+	/* Check if the buffer is sufficient in size */
 	if (pos + 1 < *bufsize)
 		return (buf);
-	new_size = *bufsize ? *bufsize * 2 : INIT_BUF_SIZE;
+	new_size = *bufsize ? *bufsize * 2 : INIT_BUF_SIZE; /* 2x size if needed*/
 	new_buf = realloc(buf, new_size);
 	if (!new_buf)
 	{
@@ -44,6 +45,7 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 	size_t bufsize = *n, pos = 0;
 	ssize_t bytes_read, i;
 
+	/* The loop to read the user input via read call */
 	while (1)
 	{
 		bytes_read = read(fd, tmp, MAX_ARGS);
@@ -53,7 +55,7 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 			break;
 		for (i = 0; i < bytes_read; i++)
 		{
-			buf = expand_buffer(buf, &bufsize, pos);
+			buf = expand_buffer(buf, &bufsize, pos);/*Check if buffer need expansion*/
 			if (!buf)
 				return (-1);
 			buf[pos++] = tmp[i];
