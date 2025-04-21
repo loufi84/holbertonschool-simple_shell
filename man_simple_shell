@@ -32,4 +32,16 @@ redirection, without direct interaction with the user.
 
 .SH RETURN VALUE
 
+.SH EXAMPLES
+
+.SH NOTES
+
+.SH SEE ALSO
+.BR man bash(1), environ(7)
+
+.S AUTHORS
+Quentin Lataste
+Delphine Coutouly-Laborda
+Arnaud Lanoizele
+Chris Sodji Aleka
 
