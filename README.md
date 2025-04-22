@@ -32,7 +32,7 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o Shell
 Finally you can run our Shell writing:
 ./Shell
 
-![Flowchart](https://github.com/loufi84/holbertonschool-simple_shell/blob/Features/Simple%20Shell%20flowchart.png)
+![Flowchart](https://github.com/loufi84/holbertonschool-simple_shell/blob/features-delphes/Flowchart%20Shell.png)
 
 
 ## 🧑‍💻Authors
