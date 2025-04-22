@@ -1,0 +1,71 @@
+.TH Shell "2025-04-21" "Version 1.0"
+.SH NAME
+Shell \- computer program implementation
+
+.SH SYNOPSIS
+.B ./Shell
+
+.SH DESCRIPTION
+The Shell refers to a type of Command Line Interface, used to interact
+with a Unix or Unix-like system. Shell provides a text-based environment
+in which users can enter commands to perform specific tasks. The user
+gives instructions in text form, which the system interprets and executes.
+The Shell can then launch programs, manage files and directories, redirect
+command output, or create automation scripts.
+
+Shell command syntax generally follows a standard pattern. However,
+variations may occur for very specific commands or advanced options. The
+command to be executed is the first element of the line. This may be the
+name of the program or function you wish to call.
+
+For some commands, behavioral modifications can be made by adding options.
+These are preceded by a dash (- ) or two dashes (-). Information or
+arguments can also be added to the command. 
+
+.B Interactive mode
+The shell displays a prompt and waits for the user to enter commands
+manually from keyboard.
+
+.B Non-interactive mode
+The shell executes commands automatically from a script, pipe or
+redirection, without direct interaction with the user.
+
+.SH RETURN VALUE
+Every command run in a shell returns an exit status (a number).
+This number indicates success or failure of the command.
+
+.SH EXAMPLES
+ls -l :
+simple_shell> ls -l
+total 184
+-rw-r--r-- 1 delphes delphes    247 Apr 22 09:37  AUTHORS
+-rw-r--r-- 1 delphes delphes 111925 Apr 22 09:23 'Flowchart Shell.png'
+-rw-r--r-- 1 delphes delphes   1743 Apr 22 10:12  README.md
+-rwxr-xr-x 1 delphes delphes  21952 Apr 22 10:49  Shell
+-rw-r--r-- 1 delphes delphes    519 Apr 18 11:55  _getenv.c
+-rw-r--r-- 1 delphes delphes   1635 Apr 22 10:16  _getline.c
+-rw-r--r-- 1 delphes delphes    494 Apr 18 14:53  comments_handling.c
+-rw-r--r-- 1 delphes delphes   1785 Apr 18 18:16  helper_funcs.c
+-rw-r--r-- 1 delphes delphes    444 Apr 18 10:19  helper_funcs2.c
+-rw-r--r-- 1 delphes delphes    496 Apr 22 10:33  main.c
+-rw-r--r-- 1 delphes delphes   1427 Apr 21 10:59  man_simple_shell
+-rwxr-xr-x 1 delphes delphes   1485 Apr 18 10:26  path_handling.c
+-rw-r--r-- 1 delphes delphes   1091 Apr 18 18:16  shell.h
+-rw-r--r-- 1 delphes delphes    897 Apr 18 11:50  what_is_cmd.c
+
+echo :
+simple_shell> echo Shell is great
+Shell is great
+
+.SH NOTES
+It does not list implied . and .. if we use "-A, --almost-all", it does not ignore entries starting with . when using "-a, --all."
+
+
+.SH SEE ALSO
+.BR man bash(1), environ(7)
+
+.S AUTHORS
+Quentin Lataste
+Delphine Coutouly-Laborda
+Arnaud Lanoizele
+Chris Sodji Aleka
