@@ -13,7 +13,6 @@ char *read_line(void)
 	size_t len = 0;
 	ssize_t whole_line;
 
-	printf("$ ");/*Prompt*/
 
 	whole_line = getline(&line, &len, stdin);/*Read user input*/
 
@@ -62,8 +61,9 @@ int split_string(char *string, char *array[])
 /**
 * shutdown - This function exits the Shell
 */
-void shutdown(void)
+void shutdown(char **args)
 {
+	(void)args; /* Evite un warning si non utilisé*/
 	printf("Merci d'avoir utilisé notre programme ฅ^•ﻌ•^ฅ\n");
 	exit(EXIT_SUCCESS);
 }
@@ -72,8 +72,9 @@ void shutdown(void)
  * print_env - This function prints the current environment
  */
 
-void print_env(void)
+void print_env(char **args)
 {
+	(void)args;
 	int i = 0;
 
 	while (environ[i])
@@ -81,4 +82,60 @@ void print_env(void)
 		printf("%s\n", environ[i]);
 		i++;
 	}
+}
+
+/**
+ * run_cmd - A function that run user's command
+ *
+ * @args: The command to run
+ */
+
+void run_cmd(char *args[])
+{
+	char *cmd = args[0];
+	int status;
+	pid_t pid = fork();
+
+	if (pid == -1)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+
+	if (pid == 0)
+	{
+		execve(cmd, args, environ);
+		perror("execve");
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+	}
+
+	return;
+}
+void cd_builtin(char *args[])
+{
+	char *path = NULL;
+
+	/* Si un argument est donné (cd/home)*/
+	if (args[1])
+		path = args[1];
+	else
+		path = getenv("HOME"); /* Otherwise on va dans le repertoir home*/
+
+	change_directory(path);
+}
+int change_directory(char *path)
+{
+	if (path == NULL)
+		path = getenv("HOME");
+
+	if (chdir(path) != 0)
+	{
+		perror("cd failed");
+		return (1);
+	}
+	return 0;
 }
