@@ -26,26 +26,26 @@ Finally you can run our Shell writing: ./Shell
 
 💻️ Exemples d'utilisation :
 
-➡️ ls -l:
-simple_shell> ls -l
-total 184
+➡️ ls -l: <br>
+simple_shell> ls -l <br>
+total 184 <br>
 -rw-r--r-- 1 delphes delphes    247 Apr 22 09:37  AUTHORS <br>
--rw-r--r-- 1 delphes delphes 111925 Apr 22 09:23 'Flowchart Shell.png'
--rw-r--r-- 1 delphes delphes   1743 Apr 22 10:12  README.md
--rwxr-xr-x 1 delphes delphes  21952 Apr 22 10:49  Shell
--rw-r--r-- 1 delphes delphes    519 Apr 18 11:55  _getenv.c
--rw-r--r-- 1 delphes delphes   1635 Apr 22 10:16  _getline.c
--rw-r--r-- 1 delphes delphes    494 Apr 18 14:53  comments_handling.c
--rw-r--r-- 1 delphes delphes   1785 Apr 18 18:16  helper_funcs.c
--rw-r--r-- 1 delphes delphes    444 Apr 18 10:19  helper_funcs2.c
--rw-r--r-- 1 delphes delphes    496 Apr 22 10:33  main.c
--rw-r--r-- 1 delphes delphes   1427 Apr 21 10:59  man_simple_shell
--rwxr-xr-x 1 delphes delphes   1485 Apr 18 10:26  path_handling.c
--rw-r--r-- 1 delphes delphes   1091 Apr 18 18:16  shell.h
--rw-r--r-- 1 delphes delphes    897 Apr 18 11:50  what_is_cmd.c
+-rw-r--r-- 1 delphes delphes 111925 Apr 22 09:23 'Flowchart Shell.png' <br>
+-rw-r--r-- 1 delphes delphes   1743 Apr 22 10:12  README.md <br>
+-rwxr-xr-x 1 delphes delphes  21952 Apr 22 10:49  Shell <br>
+-rw-r--r-- 1 delphes delphes    519 Apr 18 11:55  _getenv.c <br>
+-rw-r--r-- 1 delphes delphes   1635 Apr 22 10:16  _getline.c <br>
+-rw-r--r-- 1 delphes delphes    494 Apr 18 14:53  comments_handling.c <br>
+-rw-r--r-- 1 delphes delphes   1785 Apr 18 18:16  helper_funcs.c <br>
+-rw-r--r-- 1 delphes delphes    444 Apr 18 10:19  helper_funcs2.c <br>
+-rw-r--r-- 1 delphes delphes    496 Apr 22 10:33  main.c <br>
+-rw-r--r-- 1 delphes delphes   1427 Apr 21 10:59  man_simple_shell <br>
+-rwxr-xr-x 1 delphes delphes   1485 Apr 18 10:26  path_handling.c <br>
+-rw-r--r-- 1 delphes delphes   1091 Apr 18 18:16  shell.h <br>
+-rw-r--r-- 1 delphes delphes    897 Apr 18 11:50  what_is_cmd.c <br>
 
-➡️  echo:
-simple_shell> echo Shell is great
-Shell is great
+➡️  echo: <br>
+simple_shell> echo Shell is great <br>
+Shell is great <br>
 
 ![Flowchart](https://github.com/loufi84/holbertonschool-simple_shell/blob/Features/Simple%20Shell%20flowchart.png)
