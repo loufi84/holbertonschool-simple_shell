@@ -39,6 +39,8 @@ Finally you can run our Shell writing:
 
 <img align="center" alt="Examples" width="500" src="image-3.png">
 
+<img align="center" alt="Examples" width="500" src="image-2.png">
+
 ## 📂 Files
 
  - shell.h : Contains function declarations and necessary includes.
