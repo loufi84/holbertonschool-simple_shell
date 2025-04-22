@@ -27,5 +27,6 @@ int main(void)
 		if (what_is_cmd(args) != 0)
 			run_cmd(args);
 	}
+	free(line);
 	return (0);
 }
