@@ -76,6 +76,6 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 	buf[pos] = '\0';
 	*lineptr = buf;
 	*n = bufsize;
+	free(buf);
 	return (pos);
 }
-
