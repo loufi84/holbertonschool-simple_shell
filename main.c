@@ -8,13 +8,16 @@
 
 int main(void)
 {
-	char *line, *args[MAX_ARGS];
+	char *line = NULL, *args[MAX_ARGS];
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
 			printf("simple_shell> ");
 		fflush(stdout);
+
+		if (line)
+			free(line);
 
 		line = read_line();
 		if (line == NULL)
@@ -26,7 +29,7 @@ int main(void)
 			continue;
 		if (what_is_cmd(args) != 0)
 			run_cmd(args);
-		free(line);
 	}
+	free(line);
 	return (0);
 }
