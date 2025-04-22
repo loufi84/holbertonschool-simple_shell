@@ -24,7 +24,7 @@ Next you can compile the files with this command: gcc -Wall -Werror -Wextra -ped
 
 Finally you can run our Shell writing: ./Shell
 
-💻️ Exemples d'utilisation :
+💡 Exemples d'utilisation :
 
 ➡️ ls -l: <br>
 simple_shell> ls -l <br>
