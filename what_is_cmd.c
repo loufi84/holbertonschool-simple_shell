@@ -12,6 +12,7 @@ int what_is_cmd(char **cmd)
 	builtin_t verif[] = {
 		{"exit", shutdown},
 		{"env", print_env},
+		{"help", shell_help},
 		{NULL, NULL}
 	};
 	int i = 0;

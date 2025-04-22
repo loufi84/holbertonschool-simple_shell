@@ -19,7 +19,7 @@ static char *expand_buffer(char *buf, size_t *bufsize, size_t pos)
 	if (pos + 1 < *bufsize)
 		return (buf);
 	new_size = *bufsize ? *bufsize * 2 : INIT_BUF_SIZE; /* 2x size if needed*/
-	new_buf = realloc(buf, new_size);
+	new_buf = _realloc(buf, *bufsize, new_size);
 	if (!new_buf)
 	{
 		free(buf);
