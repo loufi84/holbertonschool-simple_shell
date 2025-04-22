@@ -27,7 +27,7 @@ char *read_line(void)
 }
 
 /**
-* split_string - splits a string into tokens using spaces as delimiter
+* split_string - splits a string into tokens using various delimiters
 * @string: the input string to split
 * @array: array to put the tokens in
 *
@@ -95,22 +95,22 @@ void run_cmd(char *args[])
 
 	if (pid == -1)
 	{
-		perror("fork");
+		perror("fork");/*If fork failed, error exit*/
 		exit(EXIT_FAILURE);
 	}
 
-	if (pid == 0)
+	if (pid == 0)/*Child process*/
 	{
 		path_handling(args);
-		if (args[0] == NULL)
+		if (args[0] == NULL)/*If command not exists, exit*/
 			exit(EXIT_FAILURE);
-		execve(args[0], args, environ);
-		perror(args[0]);
+		execve(args[0], args, environ);/*Else, executes*/
+		perror(args[0]);/*If execute failed, error exit*/
 		exit(EXIT_FAILURE);
 	}
-	else
+	else/*Parent process*/
 	{
-		waitpid(pid, &status, 0);
+		waitpid(pid, &status, 0);/*Waits for child to end*/
 	}
 
 }

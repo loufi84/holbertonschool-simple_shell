@@ -14,7 +14,7 @@ char *split_path(char *string, char *array[])
 	int i = 0;
 	char *token;
 
-	token = strtok(string, ":");
+	token = strtok(string, ":");/*Split string at every ':'*/
 	while (token && i < MAX_ARGS - 1)
 	{
 		array[i++] = token;
