@@ -40,5 +40,5 @@ Finally you can run our Shell writing:
 - [Quentin Lataste](https://github.com/loufi84)
 - [Delphine Coutouly-Laborda](https://github.com/Delphes1980)
 - [Arnaud Lanoizele](https://github.com/arnaudlanoizele)
-- [Chris Sodji Aleka](https://github.com/)
+- [Chris Sodji Aleka](https://github.com/speedy-collab)
 
