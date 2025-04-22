@@ -29,7 +29,7 @@ Finally you can run our Shell writing: ./Shell
 ➡️ ls -l:
 simple_shell> ls -l
 total 184
--rw-r--r-- 1 delphes delphes    247 Apr 22 09:37  AUTHORS
+-rw-r--r-- 1 delphes delphes    247 Apr 22 09:37  AUTHORS <br>
 -rw-r--r-- 1 delphes delphes 111925 Apr 22 09:23 'Flowchart Shell.png'
 -rw-r--r-- 1 delphes delphes   1743 Apr 22 10:12  README.md
 -rwxr-xr-x 1 delphes delphes  21952 Apr 22 10:49  Shell
