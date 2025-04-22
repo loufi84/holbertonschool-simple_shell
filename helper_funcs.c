@@ -62,20 +62,40 @@ char *split_string(char *string, char *array[])
 
 /**
 * shutdown - This function exits the Shell
+*
+* @code: The exit code
 */
-void shutdown(void)
+void shutdown(char **code)
 {
+	int status = 0, i = 0;
+
+	if (code[1] != NULL)
+	{
+		while (code[1][i])
+		{
+			if (code[1][i] < '0' || code[1][i] > '9')
+			{
+				fprintf(stderr, "exit: %s: numeric args only\n", code[1]);
+				exit(2);
+			}
+			i++;
+		}
+		status = atoi(code[1]);
+	}
 	printf("Merci d'avoir utilisé notre programme ฅ^•ﻌ•^ฅ\n");
-	exit(EXIT_SUCCESS);
+	exit(status);
 }
 
 /**
  * print_env - This function prints the current environment
+ *
+ * @env: Just a necessity for structure
  */
 
-void print_env(void)
+void print_env(char **env)
 {
 	int i = 0;
+	(void)env;
 
 	while (environ[i])
 	{

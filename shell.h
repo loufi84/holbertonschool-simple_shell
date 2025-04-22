@@ -28,15 +28,15 @@
 typedef struct builtin_s
 {
 	char *name;
-	void (*func)(void);
+	void (*func)(char **);
 } builtin_t;
 
 extern char **environ;
 
 char *split_string(char *string, char *array[]);
 char *read_line(void);
-void shutdown(void);
-void print_env(void);
+void shutdown(char **code);
+void print_env(char **env);
 int built_in(char *cmd);
 void path_handling(char **cmd);
 void run_cmd(char *args[]);
@@ -48,7 +48,10 @@ void alloc_error(char *cmd);
 ssize_t _getline(char **lineptr, size_t *n, int fd);
 void comments_handling(char *line);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-void shell_help(void);
+void shell_help(char **args);
+void help_help(void);
+void help_exit(void);
+void help_env(void);
 
 
 #endif /* SHELL_H */
