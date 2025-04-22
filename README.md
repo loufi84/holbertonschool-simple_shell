@@ -37,7 +37,7 @@ Finally you can run our Shell writing:
 
 <img align="center" alt="Examples" width="800" src="image.png">
 
-<img align="center" alt="Examples" width="800" src="image-2.png">
+<img align="center" alt="Examples" width="50" src="image-2.png">
 
 ## 📂 Files
 
