@@ -46,6 +46,8 @@ void path_error(char *args, char *path);
 void alloc_error(char *cmd);
 ssize_t _getline(char **lineptr, size_t *n, int fd);
 void comments_handling(char *line);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void shell_help(void);
 
 
 #endif /* SHELL_H */
