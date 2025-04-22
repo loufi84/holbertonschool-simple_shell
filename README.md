@@ -48,4 +48,18 @@ total 184 <br>
 simple_shell> echo Shell is great <br>
 Shell is great <br>
 
+📖 Usage
+
+Main.c => Contains the main shell loop <br>
+Shell.h => Contains libraries, functions, 		structure builtins <br>
+_getenv.c => <br>
+🔧 Function : char *_getenv(const char *name); <br>
+- Searches for an environment variable in the global environ list. <br>
+- Compares each string until it finds the one whose name matches name. <br>
+- If found, returns a copy of its value (after the =); otherwise, returns NULL. <br>
+🔧 Function : ssize_t _getline(char **lineptr, size_t *n, int fd) <br>
+- 
+
+
+
 ![Flowchart](https://github.com/loufi84/holbertonschool-simple_shell/blob/Features/Simple%20Shell%20flowchart.png)
