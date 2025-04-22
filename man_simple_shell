@@ -30,14 +30,14 @@ manually from keyboard.
 The shell executes commands automatically from a script, pipe or
 redirection, without direct interaction with the user.
 
-.SH RETURN VALUE
+.SH EXIT STATUS
 
 .SH EXAMPLES
 
 .SH NOTES
 
 .SH SEE ALSO
-.BR man bash(1), environ(7)
+.BR man bash(1), environ(7), getenv(3), getline(3), strtok(3), perror(3), fork(2), execve(2), waitpid(2)
 
 .S AUTHORS
 Quentin Lataste
