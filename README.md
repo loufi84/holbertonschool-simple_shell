@@ -50,15 +50,55 @@ Shell is great <br>
 
 📖 Usage
 
-Main.c => Contains the main shell loop <br>
-Shell.h => Contains libraries, functions, 		structure builtins <br>
-_getenv.c => <br>
+The file: Main.c <br> 
+📄 This file contains the main entry point to the shell. It handles displaying the prompt, reading command lines, and parsing arguments. <br>
+🔧 Function : int main(void) <br>
+* Starts an infinite loop that: <br>
+- Displays a prompt if the input is interactive (isatty). <br>
+- Reads a command line using read_line(). <br>
+- Splits the command into arguments using split_string(). <br>
+- (Possible future step) executes the command using fork + execve. <br>
+* If the user presses Ctrl+D (EOF), the shell exits cleanly. <br>
+The file: Shell.h <br>
+📄 This file is the main header file for the project. It centralizes library inclusions, constant definitions, function prototypes, and structures used in the shell. <br>
+📚 File Contents: <br>
+🔹 Includes: <br>
+Standard C libraries (stdio.h, stdlib.h, string.h, etc) <br>
+System libraries required for the shell (unistd.h, sys/wait.h, sys/types.h, etc.) <br>
+🔹 Constant: <br>
+#define BUFFER_SIZE 1024 <br>
+#define MAX_ARGS 64 <br>
+- BUFFER_SIZE : size of the buffer used for reading. <br>
+- MAX_ARGS : maximum number of arguments in a command. <br>
+🔹 Global variables <br>
+extern char **environ; <br>
+- Access to the system environment. <br>
+🔹Function prototypes <br>
+🔹Structures : <br>
+typedef struct builtin_s <br>
+{ <br>
+	char *name; <br>
+	void (*func)(char **args); <br>
+} builtin_t; <br>
+- Structure used to associate the name of an internal command with a function. <br>
+- Allows you to easily implement built-ins like exit, env, or cd. <br>
+The file: _getenv.c => <br>
 🔧 Function : char *_getenv(const char *name); <br>
-- Searches for an environment variable in the global environ list. <br>
+📄 - Searches for an environment variable in the global environ list. <br>
 - Compares each string until it finds the one whose name matches name. <br>
 - If found, returns a copy of its value (after the =); otherwise, returns NULL. <br>
+The file: _realloc.c <br>
 🔧 Function : ssize_t _getline(char **lineptr, size_t *n, int fd) <br>
-- 
+📄 - Reads a line of text from a file descriptor fd (e.g., STDIN_FILENO for standard input). <br>
+- Dynamically manages memory with an expandable buffer. <br>
+- Stores the read line in *lineptr and adjusts its size in *n. <br>
+The file: _realloc.c <br>
+🔧 Function : void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size); <br>
+📄 This file contains a reimplementation of the realloc function, used to dynamically resize a memory block. <br>
+- Allocates a new memory block of size new_size. <br>
+- Copies data from the old block (ptr) to the new one. <br>
+- Release the old block. <br>
+- Handles all special cases <br>
 
 
 
