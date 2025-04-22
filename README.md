@@ -35,7 +35,7 @@ Finally you can run our Shell writing:
 
 ## ✏️ Output examples
 
-![ls -l output](image.png)
+<img align="center" alt="Examples" width="800" src="image.png">
 
 ## 📂 Files
 
