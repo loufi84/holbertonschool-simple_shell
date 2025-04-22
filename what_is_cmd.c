@@ -26,7 +26,7 @@ int what_is_cmd(char **cmd)
 	{/*If cmd is a built-in, call the correct function*/
 		if (strcmp(verif[i].name, cmd[0]) == 0)
 		{
-			verif[i].func();
+			verif[i].func(cmd);
 			return (0);
 		}
 	}
