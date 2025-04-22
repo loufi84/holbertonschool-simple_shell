@@ -26,7 +26,7 @@ int main(void)
 			continue;
 		if (what_is_cmd(args) != 0)
 			run_cmd(args);
+		free(line);
 	}
-	free(line);
 	return (0);
 }
