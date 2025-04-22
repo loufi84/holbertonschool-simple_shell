@@ -13,15 +13,20 @@ char *read_line(void)
 	ssize_t whole_line;
 
 
+	errno = 0;
 	whole_line = _getline(&line, &len, 0);/*Read user input*/
 
 	if (whole_line == -1) /*EOF, (Ctrl+D) or error*/
 	{
+		if (errno == 0) /*If user types Ctrl+D (EOF)*/
+		{
+			printf("\n");
+			free(line);
+			return (NULL);
+		}
+		perror("_getline failed"); /*Handle error*/
 		free(line);
-		line = NULL;
-		len = 0;
-		printf("\n");
-		return (NULL);
+		exit(errno);
 	}
 	return (line);
 }

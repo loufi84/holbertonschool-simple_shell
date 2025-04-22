@@ -11,6 +11,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <signal.h>
+#include <errno.h>
 
 #define BUFFER_SIZE 1024
 #define INIT_BUF_SIZE 128
