@@ -38,7 +38,7 @@ char *read_line(void);
 void shutdown(char **code);
 void print_env(char **env);
 int built_in(char *cmd);
-void path_handling(char **cmd);
+void path_handling(char **cmd, const char *sn);
 void run_cmd(char *args[], const char *shell_name);
 int what_is_cmd(char **cmd);
 char *split_path(char *string, char *array[]);
