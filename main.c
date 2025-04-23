@@ -35,5 +35,5 @@ int main(int __attribute__((unused))argc, char *argv[])
 			last_status = run_cmd(args, argv[0]);
 	}
 	free(line);
-	return (0);
+	return (last_status);
 }
