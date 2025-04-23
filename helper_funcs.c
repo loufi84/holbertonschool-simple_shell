@@ -86,7 +86,7 @@ void shutdown(char **code)
 	{
 		if (!is_numeric(code[1]))
 		{
-			fprintf(stderr, "exit: %s: numeric arguments required\n", code[1]);
+			fprintf(stderr, "exit: %s: numeric argument required\n", code[1]);
 			exit(2);
 		}
 		if (code[2] != NULL)
@@ -94,7 +94,7 @@ void shutdown(char **code)
 			fprintf(stderr, "exit: too many arguments\n");
 			return;
 		}
-		status = atoi(code[1]);
+		status = _atoi(code[1]);
 	}
 	exit(status);
 }

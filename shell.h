@@ -53,6 +53,7 @@ void help_help(void);
 void help_exit(void);
 void help_env(void);
 int is_numeric(const char *str);
+int _atoi(char *s);
 
 
 #include <string.h>
