@@ -13,7 +13,7 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("($) ");
+			write(STDOUT_FILENO, "($) ", 4);
 		fflush(stdout);
 
 		if (line)
