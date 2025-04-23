@@ -112,11 +112,16 @@ void print_env(char **env)
 void run_cmd(char *args[], const char *shell_name)
 {
 	int status;
-	pid_t pid = fork();
+	pid_t pid;
 
 	if (args == NULL || args[0] == NULL)
 		return;
 
+	path_handling(args);
+	if (args[0] == NULL)/*If command not exists, exit*/
+		exit(EXIT_FAILURE);
+
+	pid = fork();
 	if (pid == -1)
 	{
 		perror("fork");/*If fork failed, error exit*/
@@ -125,9 +130,6 @@ void run_cmd(char *args[], const char *shell_name)
 
 	if (pid == 0)/*Child process*/
 	{
-		path_handling(args);
-		if (args[0] == NULL)/*If command not exists, exit*/
-			exit(EXIT_FAILURE);
 		execve(args[0], args, environ);/*Else, executes*/
 		if (errno == ENOENT)
 			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, args[0]);
