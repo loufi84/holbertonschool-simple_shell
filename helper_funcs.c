@@ -27,6 +27,7 @@ char *read_line(void)
 		free(line);
 		exit(errno);
 	}
+
 	return (line);
 }
 
@@ -42,17 +43,16 @@ char *split_string(char *string, char *array[])
 {
 	int i = 0;
 	char *token, *delim = " \t\n";
-	char *save;
 
 	if (string == NULL)
 		return (NULL);
 
-	token = strtok_r(string, delim, &save);
+	token = strtok(string, delim);
 
 	while (token != NULL && i < MAX_ARGS - 1)
 	{
 		array[i++] = token;
-		token = strtok_r(NULL, delim, &save);
+		token = strtok(NULL, delim);
 	}
 	array[i] = NULL;
 
