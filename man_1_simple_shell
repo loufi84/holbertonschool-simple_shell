@@ -30,6 +30,15 @@ manually from keyboard.
 The shell executes commands automatically from a script, pipe or
 redirection, without direct interaction with the user.
 
+.B Built-in commands
+The shell handles 
+.B exit
+, 
+.B env 
+and 
+.B help 
+built-in commands.
+
 .SH EXIT STATUS
 The shell returns the output status of the last command executed in the
 script. When attempting to execute a script, the shell first searches for
@@ -37,9 +46,6 @@ the file in the current directory; if it doesn't find it there, it
 searches the directories listed in the PATH environment variable. Errors
 detected by the shell, such as syntax errors, cause the shell to exit with
 a non-zero exit status.
-
-.SH BUILT-IN
-
 
 .SH EXAMPLES
 .B Example usage:
