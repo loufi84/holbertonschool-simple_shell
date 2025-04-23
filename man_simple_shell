@@ -39,8 +39,17 @@ detected by the shell, such as syntax errors, cause the shell to exit with
 a non-zero exit status.
 
 .SH EXAMPLES
+.B Example usage:
+.nf
+simple_shell> ls -l
+
+simple_shell> echo "My Shell is great"
+
+simple_shell> cat shell.h
+.fi
 
 .SH NOTES
+.BR No bugs known.
 
 .SH SEE ALSO
 .BR man bash(1), environ(7), getenv(3), getline(3), strtok(3), perror(3), fork(2), execve(2), waitpid(2)

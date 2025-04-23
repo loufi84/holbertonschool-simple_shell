@@ -46,8 +46,8 @@ Finally you can run our Shell writing:
  - shell.h : Contains function declarations and necessary includes.
  - main.c : Executes programs, verify the locations and handles all functions.
  - _getenv.c : Function to gets an environment variable.
- - _getline.c
- - _realloc.c
+ - _getline.c : Read a complete line of text from a stream (input or file).
+ - _realloc.c : Re-allocate a memory block.
 
 ## 🗺️ Flowchart
 
