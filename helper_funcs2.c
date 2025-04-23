@@ -52,9 +52,8 @@ void alloc_error(char *cmd)
 /**
  * path_handling - Resolves command path using PATH env variable
  * @cmd: Array containing command and arguments
- * @sn: Shell name
  */
-void path_handling(char **cmd, const char *sn)
+void path_handling(char **cmd)
 {
 	char *path_env, *path_copy, *new_cmd, *dirs[BUFFER_SIZE];
 	char full_path[BUFFER_SIZE];
@@ -66,7 +65,7 @@ void path_handling(char **cmd, const char *sn)
 	{
 		if (access(cmd[0], F_OK | X_OK) == 0)/*If true, execute*/
 			return;
-		fprintf(stderr, "%s: 1: %s: not found\n", sn, cmd[0]);/*If false, error*/
+		fprintf(stderr, "command not found: %s\n", cmd[0]);/*If false, error*/
 		cmd[0] = NULL;
 		return;
 	}

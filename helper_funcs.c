@@ -72,18 +72,19 @@ char *split_string(char *string, char *array[])
 */
 void shutdown(char **code)
 {
-	int status = 0, i = 0;
+	int status = 0;
 
-	if (code[1] != NULL)
+	if (code[1])
 	{
-		while (code[1][i])
+		if (!is_numeric(code[1]))
 		{
-			if (code[1][i] < '0' || code[1][i] > '9')
-			{
-				fprintf(stderr, "exit: %s: numeric args only\n", code[1]);
-				exit(2);
-			}
-			i++;
+			fprintf(stderr, "exit: %s: numeric arguments required\n", code[1]);
+			exit(2);
+		}
+		if (code[2] != NULL)
+		{
+			fprintf(stderr, "exit: too many arguments\n");
+			return;
 		}
 		status = atoi(code[1]);
 	}
@@ -123,7 +124,7 @@ void run_cmd(char *args[], const char *shell_name)
 	if (args == NULL || args[0] == NULL)
 		return;
 
-	path_handling(args, shell_name);
+	path_handling(args);
 	if (args[0] == NULL)/*If command not exists, exit*/
 		exit(EXIT_FAILURE);
 
