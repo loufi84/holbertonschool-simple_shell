@@ -55,3 +55,43 @@ int _atoi(char *s)
 	return (num * sign);
 }
 
+/**
+ * trim_whitespace - Removes leading and trailing whitespace from a string.
+ *
+ * @str: The input string to be trimmed.
+ *
+ * Return: A pointer to the string with leading and
+ * trailing whitespace removed.
+ * xIf the string is empty or contains only whitespace,
+ * returns an empty string.
+ */
+
+char *trim_whitespace(char *str)
+{
+	char *start = str;
+	char *end;
+
+    /* Skip leading spaces and tabs */
+	while (*start == ' ' || *start == '\t')
+		start++;
+
+	if (*start == '\0')  /* If the string is empty or only spaces */
+		return (start);
+
+    /* Find the end of the string */
+	end = start;
+	while (*end != '\0') /* Walk to the end of the string */
+		end++;
+
+    /* Move end back to the last non-whitespace character */
+	end--;
+
+    /* Skip trailing spaces and tabs */
+	while ((end > start) && (*end == ' ' || *end == '\t'))
+		end--;
+
+    /* Null terminate after the last non-space character */
+	end[1] = '\0';
+
+	return (start);
+}

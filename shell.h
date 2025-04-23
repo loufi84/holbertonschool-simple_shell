@@ -54,6 +54,7 @@ void help_exit(void);
 void help_env(void);
 int is_numeric(const char *str);
 int _atoi(char *s);
+char *trim_whitespace(char *str);
 
 
 #include <string.h>
