@@ -9,3 +9,5 @@ built_in.c
 *.sh
 tests
 tests.c
+out.txt
+empty_input_small.bash
