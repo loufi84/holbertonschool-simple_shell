@@ -20,7 +20,6 @@ char *read_line(void)
 	{
 		if (errno == 0) /*If user types Ctrl+D (EOF)*/
 		{
-			printf("\n");
 			free(line);
 			return (NULL);
 		}
