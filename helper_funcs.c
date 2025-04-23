@@ -46,19 +46,14 @@ char *split_string(char *string, char *array[])
 
 	if (string == NULL)
 		return (NULL);
-
+/*Incrementation until the first character, after all spaces at the beginning*/
 	while (*string == ' ' || *string == '\t' || *string == '\n')
 	{
 		string++;
 	}
 
 	len = strlen(string);
-
-	while (string[len] != '\0')
-	{
-		len++;
-	}
-
+/*Eras spaces at the end*/
 	while (len > 0 && (string[len - 1] == ' ' || string[len - 1] == '\t' ||
 		string[len - 1] == '\n'))
 	{
