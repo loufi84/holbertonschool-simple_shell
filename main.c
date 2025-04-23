@@ -16,7 +16,7 @@ int main(int __attribute__((unused))argc, char *argv[])
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "($) ", 4);
+			printf("simple_shell> ");
 		fflush(stdout);
 
 		if (line)
