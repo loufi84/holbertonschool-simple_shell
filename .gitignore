@@ -1,0 +1,9 @@
+.DS_Store 
+test.c
+test
+shell
+simple_shell
+in_path.c
+built_in.c
+*.sh
+tests
