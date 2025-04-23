@@ -28,7 +28,7 @@ You can install the simple shell by cloning this repo:
 *https://github.com/loufi84/holbertonschool-simple_shell*
 
 Next you can compile the files with this command:
-*gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o Shell*
+_gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o Shell_
 
 Finally you can run our Shell writing:
 *./Shell*
