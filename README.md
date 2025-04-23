@@ -50,7 +50,7 @@ You can directly run it in the shell doing :
 
 ## 📂 Files
 
-| Functions | Description |
+| Files | Description |
 | --- | --- |
 | **shell.h** | Contains function declarations and necessary includes |
 | **main.c** | Executes programs, verify the locations and handles all functions |
