@@ -12,6 +12,7 @@
 int main(int __attribute__((unused))argc, char *argv[])
 {
 	char *line = NULL, *args[MAX_ARGS];
+	int last_status = 0;
 
 	while (1)
 	{
@@ -30,9 +31,9 @@ int main(int __attribute__((unused))argc, char *argv[])
 
 		if (split_string(line, args) == NULL || args[0] == NULL)
 			continue;
-		if (what_is_cmd(args) != 0)
-			run_cmd(args, argv[0]);
+		if (what_is_cmd(args, line, last_status) != 0)
+			last_status = run_cmd(args, argv[0]);
 	}
 	free(line);
-	return (0);
+	return (last_status);
 }
