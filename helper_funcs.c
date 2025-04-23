@@ -117,7 +117,7 @@ void run_cmd(char *args[], const char *shell_name)
 	if (args == NULL || args[0] == NULL)
 		return;
 
-	path_handling(args, shell_name);
+	path_handling(args);
 	if (args[0] == NULL)/*If command not exists, exit*/
 		exit(EXIT_FAILURE);
 
