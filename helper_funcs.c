@@ -119,6 +119,8 @@ void print_env(char **env)
  *
  * @args: The command to run
  * @shell_name: The name of the shell
+ *
+ * Return: Error codes if fail, pid status
  */
 
 int run_cmd(char *args[], const char *shell_name)
@@ -144,10 +146,15 @@ int run_cmd(char *args[], const char *shell_name)
 	{
 		execve(args[0], args, environ);/*Else, executes*/
 		if (errno == ENOENT)
+		{
 			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, args[0]);
+			exit(127);
+		}
 		else
+		{
 			perror(shell_name);
-		exit(127);
+			exit(1);
+		}
 	}
 	else/*Parent process*/
 	{
