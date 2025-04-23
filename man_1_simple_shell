@@ -1,4 +1,4 @@
-.TH Shell "2025-04-21" "Version 1.0"
+.TH Shell "2025-04-23" "Version 1.0"
 .SH NAME
 Shell \- computer program implementation
 
@@ -27,8 +27,8 @@ The shell displays a prompt and waits for the user to enter commands
 manually from keyboard.
 
 .B Non-interactive mode
-The shell executes commands automatically from a script, pipe or
-redirection, without direct interaction with the user.
+The shell executes commands automatically without direct interaction with
+the user.
 
 .B Built-in commands
 The shell handles 
