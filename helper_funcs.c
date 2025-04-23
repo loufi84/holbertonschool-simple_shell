@@ -81,7 +81,6 @@ void shutdown(char **code)
 		}
 		status = atoi(code[1]);
 	}
-	printf("Merci d'avoir utilisé notre programme ฅ^•ﻌ•^ฅ\n");
 	exit(status);
 }
 
@@ -107,16 +106,22 @@ void print_env(char **env)
  * run_cmd - A function that run user's command
  *
  * @args: The command to run
+ * @shell_name: The name of the shell
  */
 
-void run_cmd(char *args[])
+void run_cmd(char *args[], const char *shell_name)
 {
 	int status;
-	pid_t pid = fork();
+	pid_t pid;
 
 	if (args == NULL || args[0] == NULL)
 		return;
 
+	path_handling(args, shell_name);
+	if (args[0] == NULL)/*If command not exists, exit*/
+		exit(EXIT_FAILURE);
+
+	pid = fork();
 	if (pid == -1)
 	{
 		perror("fork");/*If fork failed, error exit*/
@@ -125,12 +130,12 @@ void run_cmd(char *args[])
 
 	if (pid == 0)/*Child process*/
 	{
-		path_handling(args);
-		if (args[0] == NULL)/*If command not exists, exit*/
-			exit(EXIT_FAILURE);
 		execve(args[0], args, environ);/*Else, executes*/
-		perror(args[0]);/*If execute failed, error exit*/
-		exit(EXIT_FAILURE);
+		if (errno == ENOENT)
+			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, args[0]);
+		else
+			perror(shell_name);
+		exit(127);
 	}
 	else/*Parent process*/
 	{
