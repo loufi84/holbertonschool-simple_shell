@@ -7,3 +7,4 @@ in_path.c
 built_in.c
 *.sh
 tests
+tests.c
