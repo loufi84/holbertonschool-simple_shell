@@ -41,11 +41,30 @@ char *read_line(void)
 
 char *split_string(char *string, char *array[])
 {
-	int i = 0;
+	int i = 0, len = 0;
 	char *token, *delim = " \t\n";
 
 	if (string == NULL)
 		return (NULL);
+
+	while (*string == ' ' || *string == '\t' || *string == '\n')
+	{
+		string++;
+	}
+
+	len = strlen(string);
+
+	while (string[len] != '\0')
+	{
+		len++;
+	}
+
+	while (len > 0 && (string[len - 1] == ' ' || string[len - 1] == '\t' ||
+		string[len - 1] == '\n'))
+	{
+		string[len - 1] = '\0';
+		len--;
+	}
 
 	token = strtok(string, delim);
 
