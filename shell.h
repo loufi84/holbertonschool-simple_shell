@@ -35,12 +35,12 @@ extern char **environ;
 
 char *split_string(char *string, char *array[]);
 char *read_line(void);
-void shutdown(char **code);
+void shutdown(char **args, char *line, int last_status);
 void print_env(char **env);
 int built_in(char *cmd);
 void path_handling(char **cmd);
-void run_cmd(char *args[], const char *shell_name);
-int what_is_cmd(char **cmd);
+int run_cmd(char *args[], const char *shell_name);
+int what_is_cmd(char **cmd, char *line, int last_status);
 char *split_path(char *string, char *array[]);
 char *_getenv(const char *name);
 void path_error(char *args, char *path);

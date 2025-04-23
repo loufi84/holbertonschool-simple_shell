@@ -102,10 +102,9 @@ void path_handling(char **cmd)
 * Return: 0 in success, -1 in failure
 */
 
-int what_is_cmd(char **cmd)
+int what_is_cmd(char **cmd, char *line, int last_status)
 {
 	builtin_t verif[] = {
-		{"exit", shutdown},
 		{"env", print_env},
 		{"help", shell_help},
 		{NULL, NULL}
@@ -115,6 +114,12 @@ int what_is_cmd(char **cmd)
 	if (cmd == NULL || *cmd == NULL)/*Check if pointers are valid*/
 	{
 		return (-1);
+	}
+
+	if (strcmp(cmd[0], "exit") == 0)
+	{
+		shutdown(cmd, line, last_status);
+		return (0);
 	}
 
 	for (i = 0; verif[i].name != NULL; i++)

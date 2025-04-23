@@ -68,26 +68,31 @@ char *split_string(char *string, char *array[])
 /**
 * shutdown - This function exits the Shell
 *
-* @code: The exit code
+* @args: Tokenized commmand line arguments
+* @line: Input line to be freed before exit
+* @last_status: Last exit status to use if no status provided
 */
-void shutdown(char **code)
+void shutdown(char **args, char *line, int last_status)
 {
-	int status = 0;
+	int status = last_status;
 
-	if (code[1])
+	if (args[1])
 	{
-		if (!is_numeric(code[1]))
+		if (!is_numeric(args[1]))
 		{
-			fprintf(stderr, "exit: %s: numeric argument required\n", code[1]);
+			/*check if is a number*/
+			fprintf(stderr, "exit: %s: numeric argument required\n", args[1]);
+			free(line);
 			exit(2);
 		}
-		if (code[2] != NULL)
+		if (args[2]) /*Too many arguments*/
 		{
 			fprintf(stderr, "exit: too many arguments\n");
-			return;
+			return; /*Does not end the shell like Bash*/
 		}
-		status = _atoi(code[1]);
+		status = _atoi(args[1]);
 	}
+	free(line);
 	exit(status);
 }
 
@@ -116,23 +121,23 @@ void print_env(char **env)
  * @shell_name: The name of the shell
  */
 
-void run_cmd(char *args[], const char *shell_name)
+int run_cmd(char *args[], const char *shell_name)
 {
 	int status;
 	pid_t pid;
 
 	if (args == NULL || args[0] == NULL)
-		return;
+		return (0);
 
 	path_handling(args);
 	if (args[0] == NULL)/*If command not exists, exit*/
-		exit(EXIT_FAILURE);
+		return (127);
 
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("fork");/*If fork failed, error exit*/
-		exit(EXIT_FAILURE);
+		return (1);
 	}
 
 	if (pid == 0)/*Child process*/
@@ -146,7 +151,15 @@ void run_cmd(char *args[], const char *shell_name)
 	}
 	else/*Parent process*/
 	{
-		waitpid(pid, &status, 0);/*Waits for child to end*/
+		if (waitpid(pid, &status, 0) == -1)
+		{
+			perror("waitpid");
+			return (1);
+		}
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+		else
+			return (1);
 	}
 
 }
