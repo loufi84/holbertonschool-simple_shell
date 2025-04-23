@@ -41,7 +41,7 @@ char *read_line(void)
 
 char *split_string(char *string, char *array[])
 {
-	int i = 0, len = 0;
+	int i = 0;
 	char *token, *delim = " \t\n";
 
 	if (string == NULL)
@@ -52,15 +52,6 @@ char *split_string(char *string, char *array[])
 		string++;
 	}
 
-	len = strlen(string);
-/*Eras spaces at the end*/
-	while (len > 0 && (string[len - 1] == ' ' || string[len - 1] == '\t' ||
-		string[len - 1] == '\n'))
-	{
-		string[len - 1] = '\0';
-		len--;
-	}
-
 	token = strtok(string, delim);
 
 	while (token != NULL && i < MAX_ARGS - 1)
@@ -68,6 +59,7 @@ char *split_string(char *string, char *array[])
 		array[i++] = token;
 		token = strtok(NULL, delim);
 	}
+
 	array[i] = NULL;
 
 	return (array[0]);
