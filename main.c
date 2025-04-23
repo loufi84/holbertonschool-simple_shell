@@ -3,10 +3,13 @@
 /**
 * main - Entry point
 *
+* @argc: Argument count
+* @argv: Argument value
+*
 * Return: 0 for success, various errors
 */
 
-int main(void)
+int main(int __attribute__((unused))argc, char *argv[])
 {
 	char *line = NULL, *args[MAX_ARGS];
 
@@ -28,7 +31,7 @@ int main(void)
 		if (split_string(line, args) == NULL || args[0] == NULL)
 			continue;
 		if (what_is_cmd(args) != 0)
-			run_cmd(args);
+			run_cmd(args, argv[0]);
 	}
 	free(line);
 	return (0);
