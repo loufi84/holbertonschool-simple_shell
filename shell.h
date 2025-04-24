@@ -62,6 +62,8 @@ int _strncmp(const char *s1, const char *s2, size_t len);
 int handle_builtin(char **args, int *exit_status);
 char *find_command_path(char *command, int *exit_status);
 void print_error(char **args, int cmd_c, const char *shell_n, int *exit_stat);
+void execute_command(char *cmd_path, char **args, const char *shell_n,
+int *exit_stat);
 
 
 #include <string.h>

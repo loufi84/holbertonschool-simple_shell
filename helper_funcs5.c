@@ -129,4 +129,3 @@ void print_error(char **args, int cmd_c, const char *shell_n, int *exit_stat)
 	fprintf(stderr, "%s: %d: %s: not found\n", shell_n, cmd_c, args[0]);
 	*exit_stat = 127;
 }
-
