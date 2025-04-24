@@ -28,7 +28,7 @@
 typedef struct builtin_s
 {
 	char *name;
-	void (*func)(char **);
+	int (*func)(char **args, int *exit_status);
 } builtin_t;
 
 extern char **environ;
@@ -37,15 +37,8 @@ char **split_string(char *string);
 char *read_line(void);
 void shutdown(char **args, char *line, int last_status);
 void print_env(char **env);
-int built_in(char *cmd);
-void path_handling(char **cmd);
 int run_cmd(char **args, int cmd_c, const char *shell_n, int *exit_stat);
-int what_is_cmd(char **cmd, char *line, int last_status);
-char *split_path(char *string, char *array[]);
 char *_getenv(const char *name);
-void path_error(char *args, char *path);
-void alloc_error(char *cmd);
-ssize_t _getline(char **lineptr, size_t *n, int fd);
 void comments_handling(char *line);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void shell_help(char **args);
@@ -55,7 +48,6 @@ void help_env(void);
 int is_numeric(const char *str);
 int _atoi(char *s);
 char *trim_whitespace(char *str);
-int split_lines(char *line, char *cmd[], int max);
 char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t len);
@@ -64,6 +56,9 @@ char *find_command_path(char *command, int *exit_status);
 void print_error(char **args, int cmd_c, const char *shell_n, int *exit_stat);
 void execute_command(char *cmd_path, char **args, const char *shell_n,
 int *exit_stat);
+int handle_help(char **args, int *exit_status);
+int handle_env(char **args, int *exit_status);
+int handle_exit(char **args, int *exit_status);
 
 
 #include <string.h>

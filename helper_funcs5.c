@@ -1,131 +1,46 @@
 #include "shell.h"
 
 /**
-  * _strncmp - Compares at most the first n bytes of str1 and str2
-  * @s1: The first string
-  * @s2: The second string
-  * @len: The limit bytes of comparison
-  *
-  * Return: int value
-  */
-int _strncmp(const char *s1, const char *s2, size_t len)
-{
-	unsigned int pos = 0;
-	int diff = 0;
-
-	while (pos < len)
-	{
-		if (s1[pos] == s2[pos])
-		{
-			pos++;
-			continue;
-		}
-
-		else
-		{
-			diff = s1[pos] - s2[pos];
-			break;
-		}
-
-		pos++;
-	}
-
-	return (diff);
-}
-
-/**
- * find_command_path - A better handler for command path
- *
- * @command: The command to search
- * @exit_status: The status for exit (exit code)
- *
- * Return: Tokenized command
- */
-
-char *find_command_path(char *command, int *exit_status)
-{
-	char *path = _getenv("PATH");
-	char *token, *path_copy, *full_path = malloc(BUFFER_SIZE);
-	struct stat st;
-
-	if (!full_path)
-		return (NULL);
-
-    /* If PATH is NULL or empty, only absolute paths work */
-	if (!path || !*path)
-	{
-		free(full_path);
-		*exit_status = 127;
-		return (NULL);
-	}
-
-	path_copy = strdup(path);
-	if (!path_copy)
-	{
-		free(full_path);
-		return (NULL);
-	}
-
-	token = strtok(path_copy, ":");
-	while (token)
-	{
-		sprintf(full_path, "%s/%s", token, command);
-		if (stat(full_path, &st) == 0 && (st.st_mode & S_IXUSR))
-		{
-			free(path_copy);
-			free(path);
-			return (full_path);
-		}
-		token = strtok(NULL, ":");
-	}
-	free(path_copy);
-	free(path);
-	free(full_path);
-	*exit_status = 127;
-	return (NULL);
-}
-
-/**
- * handle_builtin - Function that handles better the builtins
+ * handle_env - Function to handle env command
  *
  * @args: User input
- * @exit_status: Used to handle exit status ($?)
+ * @exit_status: The exit code
  *
- * Return: 1 if exit, 0 if builtin, -1 if not a builtin
+ * Return: Always 0
  */
 
-int handle_builtin(char **args, int *exit_status)
+int handle_env(char **args, int *exit_status)
 {
-	if (_strcmp(args[0], "exit") == 0)
-	{
-		if (args[1])
-			*exit_status = _atoi(args[1]);
-		else
-			*exit_status = 0;
-
-		/*Tell main to exit*/
-		return (1);
-	}
-	else if (_strcmp(args[0], "env") == 0)
-	{
-		print_env(environ);
-		*exit_status = 0;
-		return (0);
-	}
-	return (-1); /*Not a builtin*/
+	(void)args;
+	print_env(environ);
+	*exit_status = 0;
+	return (0);
 }
 
 /**
- * print_error - A function to print errors
+ * handle_help - Function that handle help command
  *
- * @args: user input
- * @cmd_c: The number of commands
- * @shell_n: The name of the shell
- * @exit_stat: The exit code
+ * @args: User input
+ * @exit_status: The exit code
+ *
+ * Return: Always 0
  */
 
-void print_error(char **args, int cmd_c, const char *shell_n, int *exit_stat)
+int handle_help(char **args, int *exit_status)
 {
-	fprintf(stderr, "%s: %d: %s: not found\n", shell_n, cmd_c, args[0]);
-	*exit_stat = 127;
+	if (args[1] == NULL)
+		shell_help(args);
+	else
+	{
+		if (_strcmp(args[1], "exit") == 0)
+			help_exit();
+		else if (_strcmp(args[1], "env") == 0)
+			help_env();
+		else if (_strcmp(args[1], "help") == 0)
+			help_help();
+		else
+			fprintf(stderr, "help: no help topics match %s\n", args[1]);
+	}
+	*exit_status = 0;
+	return (0);
 }
