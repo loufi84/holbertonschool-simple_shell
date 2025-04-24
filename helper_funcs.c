@@ -83,7 +83,8 @@ void shutdown(char **args, char *line, int last_status)
 			fprintf(stderr, "exit: too many arguments\n");
 			return; /*Does not end the shell like Bash*/
 		}
-		status = _atoi(args[1]);
+		status = _atoi(args[1]);/*Convert the exit arg to integer status code*/
+
 	}
 	free(line);
 	exit(status);
@@ -122,6 +123,7 @@ int run_cmd(char **args, int cmd_c, const char *shell_n, int *exit_stat)
 
 	if (args == NULL || args[0] == NULL)
 		return (0);
+/* Handle built-in commands */
 	if (handle_builtin(args, exit_stat) != -1)
 		return (*exit_stat);
 
@@ -136,10 +138,10 @@ int run_cmd(char **args, int cmd_c, const char *shell_n, int *exit_stat)
 		}
 	}
 	else
-	{
+	{/* Try to find command path from PATH environment */
 		command_path = find_command_path(args[0], exit_stat);
 		if (command_path == NULL)
-		{
+		{/* If not found, print error and return */
 			print_error(args, cmd_c, shell_n, exit_stat);
 			return (*exit_stat);
 		}
