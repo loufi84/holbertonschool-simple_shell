@@ -55,9 +55,10 @@ You can directly run it in the shell doing :
 | **shell.h** | Contains function declarations and necessary includes |
 | **main.c** | Executes programs, verify the locations and handles all functions |
 | **helper_funcs.c** | contains 5 functions: read_line (reads the prompt), split_string (split string into tokens), shutdown (handle the exit of the shell), print_env (handle the current environment), run_cmd (runs user's command) |
-| **helper_funcs2.c** | 5 more functions: split_path (splits path of PATH), path_error (handles the inability to find a command), alloc_error (handles allocation error), path_handling (Resolves command path), what_is_cmd (check if the command is an absolute path or a built_in) |
-| **helper_funcs3.c** | 5 more functions: _getenv (gets an environnement variable), expand_buffer (expands the buffer if needed), _getline (reads an entire line from stream), _realloc (Re-allocate a memory block), comments_handling (handles the comments) |
-| **helper_funcs4.c** | 5 more function: is_numeric (checks if an arg is numeric), _atoi (convert a string to an int), trim_whitespace (Removes leading and trailing whitespace from a string), _strchr (locates a character in a string), _strcmp (compares 2 strings) |
+| **helper_funcs2.c** | 4 more functions: _strncmp (Compares at most the first n bytes of str1 and str2), find_command_path (A handler for command path), handle_builtin (Function that handles the builtins), print_error (A function to print errors) |
+| **helper_funcs3.c** | 5 more functions: _getenv (gets an environnement variable), _realloc (Re-allocate a memory block), comments_handling (handles the comments), execute_command (Execute a command with fork and execve), _strcmp (compares 2 strings) |
+| **helper_funcs4.c** | 5 more functions: is_numeric (checks if an arg is numeric), _atoi (convert a string to an int), trim_whitespace (Removes leading and trailing whitespace from a string), _strchr (locates a character in a string), handle_exit (Function to handle exit command) |
+| **helper_funcs5.c** | 2 more functions: handle_env (Function to handle env command), handle_help (Function that handle help command) |
 | **helpers_help.c** | contains 4 functions: shell_help (displays the shell's help page), help_help (display the help help page), help_exit (displays exit help page), help_env (displays env help page) |
 
 
