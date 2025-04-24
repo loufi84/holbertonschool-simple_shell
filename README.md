@@ -51,7 +51,7 @@ Finally you can run our Shell by running:
 
 This project contains a man page in the repository files.
 You can directly run it in the shell doing :
-*man ./man_1_simple_shell*
+*`man ./man_1_simple_shell`*
 
 
 ## 📂 Files
