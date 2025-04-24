@@ -25,7 +25,7 @@ int is_numeric(const char *str)
 }
 
 /**
- * _atoi - convert a string to an itnt
+ * _atoi - convert a string to an int
  * @s: sring to convert to int
  * Return: int
  */
@@ -124,5 +124,33 @@ char *_strchr(char *s, char c)
 		return (s);
 	}
 
-	return ('\0');
+	return (NULL);
+}
+
+/**
+* _strcmp - compares 2 strings
+* @s1: first string to be compared
+* @s2: second string to be compared
+*
+* Return: an integer
+*/
+
+int _strcmp(char *s1, char *s2)
+{
+
+	int i = 0;
+
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+
+		if (s1[i] != s2[i])
+		{
+			return (s1[i] - s2[i]);
+		}
+
+		i++;
+	}
+
+	return (s1[i] - s2[i]);
+
 }
