@@ -93,6 +93,8 @@ void path_handling(char **cmd)
 	free(path_env);
 	if (found)/*If nothing found, nothing is executed so return*/
 		return;
+	if (!found)
+		cmd[0] = NULL;
 }
 
 /**
