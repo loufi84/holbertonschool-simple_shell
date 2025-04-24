@@ -28,7 +28,7 @@
 typedef struct builtin_s
 {
 	char *name;
-	void (*func)(char **);
+	int (*func)(char **args, int *exit_status);
 } builtin_t;
 
 extern char **environ;
