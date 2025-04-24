@@ -58,6 +58,7 @@ char *trim_whitespace(char *str);
 int split_lines(char *line, char *cmd[], int max);
 char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
+int _strncmp(const char *s1, const char *s2, size_t len);
 
 
 #include <string.h>
