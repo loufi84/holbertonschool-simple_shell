@@ -15,7 +15,7 @@ int _strncmp(const char *s1, const char *s2, size_t len)
 
 	while (pos < len)
 	{
-		if (s1[pos] == s2[pos])
+		if (s1[pos] == s2[pos]) /*Characters match, keep comparing*/
 		{
 			pos++;
 			continue;
@@ -23,14 +23,14 @@ int _strncmp(const char *s1, const char *s2, size_t len)
 
 		else
 		{
-			diff = s1[pos] - s2[pos];
+			diff = s1[pos] - s2[pos]; /*Compute ASCII difference*/
 			break;
 		}
 
 		pos++;
 	}
 
-	return (diff);
+	return (diff); /*0 if all matched, otherwise difference*/
 }
 
 /**
