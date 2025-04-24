@@ -117,29 +117,21 @@ char *_strchr(char *s, char c)
 }
 
 /**
-* _strcmp - compares 2 strings
-* @s1: first string to be compared
-* @s2: second string to be compared
+* handle_exit - Function to handle exit command
 *
-* Return: an integer
+* @args: User input
+* @exit_status: Exit code to return
+*
+* Return: The exit status or 0 if no input
 */
 
-int _strcmp(char *s1, char *s2)
+int handle_exit(char **args, int *exit_status)
 {
+	if (args[1])
+		*exit_status = _atoi(args[1]);
+	else
+		*exit_status = 0;
 
-	int i = 0;
-
-	while (s1[i] != '\0' && s2[i] != '\0')
-	{
-
-		if (s1[i] != s2[i])
-		{
-			return (s1[i] - s2[i]);
-		}
-
-		i++;
-	}
-
-	return (s1[i] - s2[i]);
-
+	/*Tell main to exit*/
+	return (1);
 }
