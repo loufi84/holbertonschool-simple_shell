@@ -14,7 +14,7 @@ char *read_line(void)
 
 
 	errno = 0;
-	whole_line = _getline(&line, &len, 0);/*Read user input*/
+	whole_line = getline(&line, &len, stdin);/*Read user input*/
 
 	if (whole_line == -1) /*EOF, (Ctrl+D) or error*/
 	{
@@ -23,7 +23,7 @@ char *read_line(void)
 			free(line);
 			return (NULL);
 		}
-		perror("_getline failed"); /*Handle error*/
+		perror("getline failed"); /*Handle error*/
 		free(line);
 		exit(errno);
 	}
@@ -44,15 +44,26 @@ char *split_string(char *string, char *array[])
 	int i = 0;
 	char *token, *delim = " \t\n";
 
-	if (string == NULL)
-		return (NULL);
-/*Incrementation until the first character, after all spaces at the beginning*/
-	while (*string == ' ' || *string == '\t' || *string == '\n')
+	if (string == NULL || *string == '\0')
 	{
-		string++;
+		array[0] = NULL;
+		return (NULL);
 	}
 
+	while (*string == ' ' || *string == '\t' || *string == '\n')
+		string++;
+
+	if (*string == '\0')
+	{
+		array[0] = NULL;
+		return (NULL);
+	}
 	token = strtok(string, delim);
+	if (token == NULL)
+	{
+		array[0] = NULL;
+		return (NULL);
+	}
 
 	while (token != NULL && i < MAX_ARGS - 1)
 	{
@@ -61,7 +72,6 @@ char *split_string(char *string, char *array[])
 	}
 
 	array[i] = NULL;
-
 	return (array[0]);
 }
 
@@ -130,18 +140,15 @@ int run_cmd(char *args[], const char *shell_name)
 
 	if (args == NULL || args[0] == NULL)
 		return (0);
-
 	path_handling(args);
 	if (args[0] == NULL)/*If command not exists, exit*/
 		return (127);
-
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("fork");/*If fork failed, error exit*/
 		return (1);
 	}
-
 	if (pid == 0)/*Child process*/
 	{
 		execve(args[0], args, environ);/*Else, executes*/
@@ -168,5 +175,4 @@ int run_cmd(char *args[], const char *shell_name)
 		else
 			return (1);
 	}
-
 }

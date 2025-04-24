@@ -147,4 +147,3 @@ int what_is_cmd(char **cmd, char *line, int last_status)
 
 	return (-1);/*If not a built-in nor an absolute path*/
 }
-

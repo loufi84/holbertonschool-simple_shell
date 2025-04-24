@@ -55,6 +55,7 @@ void help_env(void);
 int is_numeric(const char *str);
 int _atoi(char *s);
 char *trim_whitespace(char *str);
+int split_lines(char *line, char *cmd[], int max);
 
 
 #include <string.h>
