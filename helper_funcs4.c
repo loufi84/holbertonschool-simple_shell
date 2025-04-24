@@ -68,33 +68,22 @@ int _atoi(char *s)
 
 char *trim_whitespace(char *str)
 {
-	char *start = str;
 	char *end;
 
-    /* Skip leading spaces and tabs */
-	while (*start == ' ' || *start == '\t')
-		start++;
+	while (*str == ' ' || *str == '\t' || *str == '\n')
+		str++;
 
-	if (*start == '\0')  /* If the string is empty or only spaces */
-		return (start);
+	if (*str == 0)
+		return (str);
 
-    /* Find the end of the string */
-	end = start;
-	while (*end != '\0') /* Walk to the end of the string */
-		end++;
-
-    /* Move end back to the last non-whitespace character */
-	end--;
-
-    /* Skip trailing spaces and tabs */
-	while ((end > start) && (*end == ' ' || *end == '\t'))
+	end = str + strlen(str) - 1;
+	while (end > str && (*end == ' ' || *end == '\t' || *end == '\n'))
 		end--;
 
-    /* Null terminate after the last non-space character */
 	end[1] = '\0';
-
-	return (start);
+	return (str);
 }
+
 
 /**
 * _strchr - locates a character in a string

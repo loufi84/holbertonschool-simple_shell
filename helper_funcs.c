@@ -38,38 +38,33 @@ char *read_line(void)
 *
 * Return: a NULL-terminated array of tokens (words), or NULL on failure
 */
+#include "shell.h"
 
-char *split_string(char *string, char *array[])
+/**
+ * split_string - Split a string by whitespace into an array of tokens
+ * @string: Input string
+ *
+ * Return: Pointer to a NULL-terminated array of strings
+ */
+
+char **split_string(char *string)
 {
+	char **tokens = malloc(sizeof(char *) * MAX_ARGS);
+	char *token;
 	int i = 0;
-	char *token, *delim = " \t\n";
 
-	if (string == NULL || *string == '\0')
-	{
-		array[0] = NULL;
+	if (!tokens)
 		return (NULL);
-	}
 
-	if (*string == '\0')
-	{
-		array[0] = NULL;
-		return (NULL);
-	}
-	token = strtok(string, delim);
-	if (token == NULL)
-	{
-		array[0] = NULL;
-		return (NULL);
-	}
-
+	token = strtok(string, " \t\n");
 	while (token != NULL && i < MAX_ARGS - 1)
 	{
-		array[i++] = token;
-		token = strtok(NULL, delim);
+		tokens[i++] = token;
+		token = strtok(NULL, " \t\n");
 	}
+	tokens[i] = NULL;
 
-	array[i] = NULL;
-	return (array[0]);
+	return (tokens);
 }
 
 /**
@@ -130,43 +125,46 @@ void print_env(char **env)
  * Return: Error codes if fail, pid status
  */
 
-int run_cmd(char *args[], const char *shell_name)
+int run_cmd(char **args, int cmd_c, const char *shell_n, int *exit_stat)
 {
-	int status;
+	char *command_path;
 	pid_t pid;
+	int status;
 
 	if (args == NULL || args[0] == NULL)
 		return (0);
-	path_handling(args);
-	if (args[0] == NULL)/*If command not exists, exit*/
-		return (127);
+
+	if (handle_builtin(args, exit_stat) != -1)
+		return (*exit_stat);
+
+	command_path = find_command_path(args[0], exit_stat);
+	if (command_path == NULL)
+	{
+		print_error(args, cmd_c, shell_n, exit_stat);
+		return (*exit_stat);
+	}
+
 	pid = fork();
 	if (pid == -1)
-	{perror("fork");/*If fork failed, error exit*/
-		return (1); }
+	{
+		perror("fork");
+		*exit_stat = 1;
+		free(command_path);
+		return (*exit_stat);
+	}
 
-	if (pid == 0)/*Child process*/
+	if (pid == 0)
 	{
-		execve(args[0], args, environ);/*Else, executes*/
-		if (errno == ENOENT)
-		{
-			fprintf(stderr, "%s: 1: %s: not found\n", shell_name, args[0]);
-			exit(127);
-		}
-		else
-		{perror(shell_name);
-			exit(1); }
+		execve(command_path, args, environ);
+		perror(shell_n);
+		free(command_path);
+		exit(127); /*Command not found*/
 	}
-	else/*Parent process*/
-	{
-		if (waitpid(pid, &status, 0) == -1)
-		{
-			perror("waitpid");
-			return (1);
-		}
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-		else
-			return (1);
-	}
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		*exit_stat = WEXITSTATUS(status);
+	else
+		*exit_stat = 1;
+	free(command_path);
+	return (*exit_stat);
 }

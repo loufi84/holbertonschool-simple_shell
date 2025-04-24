@@ -33,13 +33,13 @@ typedef struct builtin_s
 
 extern char **environ;
 
-char *split_string(char *string, char *array[]);
+char **split_string(char *string);
 char *read_line(void);
 void shutdown(char **args, char *line, int last_status);
 void print_env(char **env);
 int built_in(char *cmd);
 void path_handling(char **cmd);
-int run_cmd(char *args[], const char *shell_name);
+int run_cmd(char **args, int cmd_c, const char *shell_n, int *exit_stat);
 int what_is_cmd(char **cmd, char *line, int last_status);
 char *split_path(char *string, char *array[]);
 char *_getenv(const char *name);
@@ -59,6 +59,9 @@ int split_lines(char *line, char *cmd[], int max);
 char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t len);
+int handle_builtin(char **args, int *exit_status);
+char *find_command_path(char *command, int *exit_status);
+void print_error(char **args, int cmd_c, const char *shell_n, int *exit_stat);
 
 
 #include <string.h>
@@ -80,4 +83,3 @@ extern char **environ;
 
 
 #endif /* SHELL_H */
-
