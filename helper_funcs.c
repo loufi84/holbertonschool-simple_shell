@@ -50,9 +50,6 @@ char *split_string(char *string, char *array[])
 		return (NULL);
 	}
 
-	while (*string == ' ' || *string == '\t' || *string == '\n')
-		string++;
-
 	if (*string == '\0')
 	{
 		array[0] = NULL;

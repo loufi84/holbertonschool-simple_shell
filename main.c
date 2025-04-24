@@ -30,9 +30,6 @@ int main(int __attribute__((unused))argc, char *argv[])
 
 		trimmed_line = trim_whitespace(line);
 
-		if (*trimmed_line == '\0')
-			continue;
-
 		if (split_string(trimmed_line, args) == NULL || args[0] == NULL)
 			continue;
 
