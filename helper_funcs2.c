@@ -50,59 +50,56 @@ void alloc_error(char *cmd)
 }
 
 /**
- * path_handling - Resolves command path using PATH env variable
- * @cmd: Array containing command and arguments
- */
+* path_handling - Resolves command path using PATH env variable
+* @cmd: Array containing command and arguments
+*/
 void path_handling(char **cmd)
 {
-	char *path_env, *path_copy, *dirs[BUFFER_SIZE], full_path[BUFFER_SIZE];
-	int i;
+	char *path_env, *path_copy, *new_cmd, *dirs[BUFFER_SIZE];
+	char full_path[BUFFER_SIZE];
+	int i, found = 0;
 
 	if (!cmd || !cmd[0])
 		return;
-	if (strchr(cmd[0], '/'))/* Handle absolute paths */
-	{/* Check if absolute path exists and is executable */
-		if (access(cmd[0], F_OK | X_OK) == 0)
+	if (strchr(cmd[0], '/'))/*Search for sign '/'*/
+	{
+		if (access(cmd[0], F_OK | X_OK) == 0)/*If true, execute*/
 			return;
-		path_error(cmd[0], NULL);/*Path not found: report error and clear cmd*/
+		fprintf(stderr, "command not found: %s\n", cmd[0]);/*If false, error*/
 		cmd[0] = NULL;
 		return;
 	}
-	path_env = _getenv("PATH");/* Get PATH environment variable */
-	if (!path_env || !*path_env)/* Handle empty or undefined PATH */
-	{path_error(cmd[0], path_env);
-		cmd[0] = NULL;
-		return; }
-	path_copy = strdup(path_env);/* Create working copy of PATH */
-	free(path_env);  /* Free original PATH copy from _getenv */
-	if (!path_copy)
-		return;  /* Allocation check */
+	path_env = _getenv("PATH");
+	if (!path_env || !*path_env)/*If empty or not exists, error*/
+		path_error(cmd[0], path_env);
 
-	split_path(path_copy, dirs);/* Split PATH into directories */
+	path_copy = strdup(path_env);
+	if (!path_copy)/*If memory alloc fails, error*/
+		alloc_error(cmd[0]);
 
-	for (i = 0; dirs[i]; i++)/* Search through PATH directories */
-	{/* Build full path for current directory */
+	split_path(path_copy, dirs);/*Cut path with ':'*/
+	for (i = 0; dirs[i] && !found; i++)
+	{
 		sprintf(full_path, "%s/%s", dirs[i], cmd[0]);
-	/* Check if command exists in this directory */
-		if (access(full_path, F_OK | X_OK) == 0)
-		{/* Replace command with full path */
-			free(cmd[0]);
-			cmd[0] = strdup(full_path);
+		if (access(full_path, F_OK | X_OK) == -1)/*If path exists, continue*/
+			continue;
+		new_cmd = strdup(full_path);/*memory allowed to existing full path*/
+		if (!new_cmd)
 			break;
-		}
+		cmd[0] = new_cmd;
+		found = 1;
 	}
 	free(path_copy);
-	if (!dirs[i])/*Command not found */
-	{path_error(cmd[0], NULL);
-		cmd[0] = NULL; }
+	free(path_env);
+	if (found)/*If nothing found, nothing is executed so return*/
+		return;
 }
-
 
 /**
 * what_is_cmd - check if the command is an absolute path or a built_in
 * @cmd: an array of tokens (= input)
-* @line:
-* @last_status:
+* @line: full input line
+* @last_status: previous command's exit status
 *
 * Return: 0 in success, -1 in failure
 */
