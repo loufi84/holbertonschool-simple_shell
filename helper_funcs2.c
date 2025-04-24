@@ -116,7 +116,7 @@ int what_is_cmd(char **cmd, char *line, int last_status)
 	if (cmd == NULL || *cmd == NULL)/*Check if pointers are valid*/
 		return (-1);
 
-	if (strcmp(cmd[0], "exit") == 0)
+	if (_strcmp(cmd[0], "exit") == 0)
 	{
 		shutdown(cmd, line, last_status);
 		return (0);
@@ -124,7 +124,7 @@ int what_is_cmd(char **cmd, char *line, int last_status)
 
 	for (i = 0; verif[i].name != NULL; i++)
 	{/*If cmd is a built-in, call the correct function*/
-		if (strcmp(verif[i].name, cmd[0]) == 0)
+		if (_strcmp(verif[i].name, cmd[0]) == 0)
 		{
 			verif[i].func(cmd);
 			return (0);

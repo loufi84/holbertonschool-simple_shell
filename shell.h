@@ -57,6 +57,7 @@ int _atoi(char *s);
 char *trim_whitespace(char *str);
 int split_lines(char *line, char *cmd[], int max);
 char *_strchr(char *s, char c);
+int _strcmp(char *s1, char *s2);
 
 
 #include <string.h>
