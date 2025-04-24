@@ -61,7 +61,7 @@ void path_handling(char **cmd)
 
 	if (!cmd || !cmd[0])
 		return;
-	if (strchr(cmd[0], '/'))/*Search for sign '/'*/
+	if (_strchr(cmd[0], '/'))/*Search for sign '/'*/
 	{
 		if (access(cmd[0], F_OK | X_OK) == 0)/*If true, execute*/
 			return;

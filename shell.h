@@ -56,6 +56,7 @@ int is_numeric(const char *str);
 int _atoi(char *s);
 char *trim_whitespace(char *str);
 int split_lines(char *line, char *cmd[], int max);
+char *_strchr(char *s, char c);
 
 
 #include <string.h>
