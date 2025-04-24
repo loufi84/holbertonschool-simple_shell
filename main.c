@@ -24,27 +24,18 @@ int main(int __attribute__((unused))argc, char *argv[])
 
 		line = read_line();
 		if (line == NULL)
-		{
-			printf("read_line returned NULL\n");
 			break;
-		}
-		printf("Line read: '%s\n", line);
+
 		comments_handling(line);
 
 		trimmed_line = trim_whitespace(line);
-		printf("Trimmed line : '%s\n", trimmed_line);
 
 		if (*trimmed_line == '\0')
-		{
-			printf("Empty line, continue\n");
 			continue;
-		}
+
 		if (split_string(trimmed_line, args) == NULL || args[0] == NULL)
-		{
-			printf("split_string returne NULL or args[0] is NULL\n");
 			continue;
-		}
-		printf("command : %s\n", args[0]);
+
 		if (what_is_cmd(args, line, last_status) != 0)
 			last_status = run_cmd(args, argv[0]);
 	}
