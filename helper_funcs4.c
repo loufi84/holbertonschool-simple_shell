@@ -25,7 +25,7 @@ int is_numeric(const char *str)
 }
 
 /**
- * _atoi - convert a string to an itnt
+ * _atoi - convert a string to an int
  * @s: sring to convert to int
  * Return: int
  */

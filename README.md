@@ -57,7 +57,7 @@ You can directly run it in the shell doing :
 | **helper_funcs.c** | contains 5 functions: read_line (reads the prompt), split_string (split string into tokens), shutdown (handle the exit of the shell), print_env (handle the current environment), run_cmd (runs user's command) |
 | **helper_funcs2.c** | 5 more functions: split_path (splits path of PATH), path_error (handles the inability to find a command), alloc_error (handles allocation error), path_handling (Resolves command path), what_is_cmd (check if the command is an absolute path or a built_in) |
 | **helper_funcs3.c** | 5 more functions: _getenv (gets an environnement variable), expand_buffer (expands the buffer if needed), _getline (reads an entire line from stream), _realloc (Re-allocate a memory block), comments_handling (handles the comments) |
-| **helper_funcs4.c** | 1 more function: is_numeric (checks if an arg is numeric) |
+| **helper_funcs4.c** | 5 more function: is_numeric (checks if an arg is numeric), _atoi (convert a string to an int), trim_whitespace (Removes leading and trailing whitespace from a string), _strchr (locates a character in a string), _strcmp (compares 2 strings) |
 | **helpers_help.c** | contains 4 functions: shell_help (displays the shell's help page), help_help (display the help help page), help_exit (displays exit help page), help_env (displays env help page) |
 
 
