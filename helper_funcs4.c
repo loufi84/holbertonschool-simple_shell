@@ -69,14 +69,15 @@ int _atoi(char *s)
 char *trim_whitespace(char *str)
 {
 	char *end;
-
+/*Skip leading whitespace*/
 	while (*str == ' ' || *str == '\t' || *str == '\n')
 		str++;
 
 	if (*str == 0)
 		return (str);
 
-	end = str + strlen(str) - 1;
+	end = str + strlen(str) - 1;/*Move end pointer to the last character*/
+	/*Trim trailing whitespace*/
 	while (end > str && (*end == ' ' || *end == '\t' || *end == '\n'))
 		end--;
 
@@ -126,11 +127,16 @@ char *_strchr(char *s, char c)
 */
 
 int handle_exit(char **args, int *exit_status)
-{
+{/*If an argument is provided, convert it to an integer exit status*/
 	if (args[1])
+	{
 		*exit_status = _atoi(args[1]);
+	}
+
 	else
-		*exit_status = 0;
+	{
+		*exit_status = 0;/*Default exit status is 0 if none provided*/
+	}
 
 	/*Tell main to exit*/
 	return (1);

@@ -13,7 +13,7 @@ gives instructions in text form, which the system interprets and executes.
 The Shell can then launch programs, manage files and directories, redirect
 command output, or create automation scripts.
 
-Shell command syntax generally follows a standard pattern. However,
+Command syntax generally follows a standard pattern. However,
 variations may occur for very specific commands or advanced options. The
 command to be executed is the first element of the line. This may be the
 name of the program or function you wish to call.
@@ -30,22 +30,28 @@ manually from keyboard.
 The shell executes commands automatically without direct interaction with
 the user.
 
-.B Built-in commands
-The shell handles 
+.B BUILT-IN COMMANDS
+The shell handles
 .B exit
+(terminate the shell)
 , 
-.B env 
-and 
+.B env
+(display current environment variables) and 
 .B help 
-built-in commands.
+(show built-in help system) built-in commands.
 
 .SH EXIT STATUS
-The shell returns the output status of the last command executed in the
+Returns the exit status of the last command executed in the
 script. When attempting to execute a script, the shell first searches for
 the file in the current directory; if it doesn't find it there, it
 searches the directories listed in the PATH environment variable. Errors
 detected by the shell, such as syntax errors, cause the shell to exit with
 a non-zero exit status.
+
+.SH ENVIRONMENT
+The shell uses the following variables :
+.B PATH
+List of directories to search for executables.
 
 .SH EXAMPLES
 .B Example usage:
@@ -58,7 +64,7 @@ simple_shell> cat shell.h
 .fi
 
 .SH NOTES
-.BR No bugs known.
+.BR No known bugs. Implements basic functionality.
 
 .SH SEE ALSO
 .BR man bash(1), environ(7), getenv(3), getline(3), strtok(3), perror(3), fork(2), execve(2), waitpid(2)

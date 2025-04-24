@@ -29,7 +29,7 @@ int handle_env(char **args, int *exit_status)
 int handle_help(char **args, int *exit_status)
 {
 	if (args[1] == NULL)
-		shell_help(args);
+		shell_help(args);/*General help if no specific command is requested*/
 	else
 	{
 		if (_strcmp(args[1], "exit") == 0)
@@ -41,6 +41,6 @@ int handle_help(char **args, int *exit_status)
 		else
 			fprintf(stderr, "help: no help topics match %s\n", args[1]);
 	}
-	*exit_status = 0;
+	*exit_status = 0;/*Always set status to 0*/
 	return (0);
 }
