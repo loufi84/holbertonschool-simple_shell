@@ -67,7 +67,8 @@ simple_shell> cat shell.h
 .BR No known bugs. Implements basic functionality.
 
 .SH SEE ALSO
-.BR man bash(1), environ(7), getenv(3), getline(3), strtok(3), perror(3), fork(2), execve(2), waitpid(2)
+.BR man bash(1), environ(7), getenv(3), getline(3), strtok(3), perror(3),
+fork(2), execve(2), waitpid(2)
 
 .S AUTHORS
 Quentin Lataste

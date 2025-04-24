@@ -25,13 +25,13 @@ First, be sure to have:
 This program was designed for Linux systems. It was tested functional on a Mac M2 (Apple Silicon) and may cause segmentation fault with this architecture.
 
 You can install the simple shell by cloning this repo:
-`*https://github.com/loufi84/holbertonschool-simple_shell*`
+*`https://github.com/loufi84/holbertonschool-simple_shell`*
 
 Next you can compile the files with this command:
-`_gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o Shell_`
+_`gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o Shell`_
 
 Finally you can run our Shell by running:
-`*./Shell*`
+*`./Shell`*
 
 ## 💡 Features
 - Interactive and non-interactive modes
