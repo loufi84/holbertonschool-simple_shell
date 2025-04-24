@@ -33,27 +33,66 @@ int _strncmp(const char *s1, const char *s2, size_t len)
 	return (diff);
 }
 
+/**
+ * find_command_path - A better handler for command path
+ *
+ * @command: The command to search
+ * @exit_status: The status for exit (exit code)
+ *
+ * Return: Tokenized command
+ */
+
 char *find_command_path(char *command, int *exit_status)
 {
 	char *path = _getenv("PATH");
-	char *token, *full_path = malloc(BUFFER_SIZE);
+	char *token, *path_copy, *full_path = malloc(BUFFER_SIZE);
 	struct stat st;
 
-	if (!path || !full_path)
+	if (!full_path)
 		return (NULL);
 
-	token = strtok(path, ":");
+    /* If PATH is NULL or empty, only absolute paths work */
+	if (!path || !*path)
+	{
+		free(full_path);
+		*exit_status = 127;
+		return (NULL);
+	}
+
+	path_copy = strdup(path);
+	if (!path_copy)
+	{
+		free(full_path);
+		return (NULL);
+	}
+
+	token = strtok(path_copy, ":");
 	while (token)
 	{
-		snprintf(full_path, BUFFER_SIZE, "%s/%s", token, command);
+		sprintf(full_path, "%s/%s", token, command);
 		if (stat(full_path, &st) == 0 && (st.st_mode & S_IXUSR))
+		{
+			free(path_copy);
+			free(path);
 			return (full_path);
+		}
 		token = strtok(NULL, ":");
 	}
+	free(path_copy);
+	free(path);
 	free(full_path);
 	*exit_status = 127;
 	return (NULL);
 }
+
+/**
+ * handle_builtin - Function that handles better the builtins
+ *
+ * @args: User input
+ * @exit_status: Used to handle exit status ($?)
+ *
+ * Return: 1 if exit, 0 if builtin, -1 if not a builtin
+ */
 
 int handle_builtin(char **args, int *exit_status)
 {
@@ -76,10 +115,18 @@ int handle_builtin(char **args, int *exit_status)
 	return (-1); /*Not a builtin*/
 }
 
+/**
+ * print_error - A function to print errors
+ *
+ * @args: user input
+ * @cmd_c: The number of commands
+ * @shell_n: The name of the shell
+ * @exit_stat: The exit code
+ */
 
-void print_error(char **args, int cmd_count, const char *shell_name, int *exit_status)
+void print_error(char **args, int cmd_c, const char *shell_n, int *exit_stat)
 {
-	fprintf(stderr, "%s: %d: %s: not found\n", shell_name, cmd_count, args[0]);
-	*exit_status = 127;
+	fprintf(stderr, "%s: %d: %s: not found\n", shell_n, cmd_c, args[0]);
+	*exit_stat = 127;
 }
 

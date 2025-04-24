@@ -124,47 +124,65 @@ void print_env(char **env)
  *
  * Return: Error codes if fail, pid status
  */
-
 int run_cmd(char **args, int cmd_c, const char *shell_n, int *exit_stat)
 {
-	char *command_path;
-	pid_t pid;
-	int status;
+    char *command_path;
+    pid_t pid;
+    int status;
 
-	if (args == NULL || args[0] == NULL)
-		return (0);
+    if (args == NULL || args[0] == NULL)
+        return (0);
 
-	if (handle_builtin(args, exit_stat) != -1)
-		return (*exit_stat);
+    if (handle_builtin(args, exit_stat) != -1)
+        return (*exit_stat);
 
-	command_path = find_command_path(args[0], exit_stat);
-	if (command_path == NULL)
-	{
-		print_error(args, cmd_c, shell_n, exit_stat);
-		return (*exit_stat);
-	}
+    /* Check if it's an absolute or relative path first */
+    if (_strchr(args[0], '/') != NULL)
+    {
+        /* It's a path, try to execute directly */
+        if (access(args[0], F_OK | X_OK) == 0)
+        {
+            command_path = strdup(args[0]);
+        }
+        else
+        {
+            /* Path exists but not executable or doesn't exist */
+            print_error(args, cmd_c, shell_n, exit_stat);
+            return (*exit_stat);
+        }
+    }
+    else
+    {
+        /* Not a path, search in PATH */
+        command_path = find_command_path(args[0], exit_stat);
+        if (command_path == NULL)
+        {
+            print_error(args, cmd_c, shell_n, exit_stat);
+            return (*exit_stat);
+        }
+    }
 
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		*exit_stat = 1;
-		free(command_path);
-		return (*exit_stat);
-	}
+    pid = fork();
+    if (pid == -1)
+    {
+        perror("fork");
+        *exit_stat = 1;
+        free(command_path);
+        return (*exit_stat);
+    }
 
-	if (pid == 0)
-	{
-		execve(command_path, args, environ);
-		perror(shell_n);
-		free(command_path);
-		exit(127); /*Command not found*/
-	}
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		*exit_stat = WEXITSTATUS(status);
-	else
-		*exit_stat = 1;
-	free(command_path);
-	return (*exit_stat);
+    if (pid == 0)
+    {
+        execve(command_path, args, environ);
+        perror(shell_n);
+        free(command_path);
+        exit(127); /*Command not found*/
+    }
+    waitpid(pid, &status, 0);
+    if (WIFEXITED(status))
+        *exit_stat = WEXITSTATUS(status);
+    else
+        *exit_stat = 1;
+    free(command_path);
+    return (*exit_stat);
 }
