@@ -18,10 +18,10 @@ int is_numeric(const char *str)
 		i++;
 	for (; str[i]; i++)
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if (str[i] < '0' || str[i] > '9')/*Non-digit character*/
 			return (0);
 	}
-	return (1);
+	return (1);/*String is numeric*/
 }
 
 /**
