@@ -137,10 +137,8 @@ int run_cmd(char *args[], const char *shell_name)
 
 	pid = fork();
 	if (pid == -1)
-	{
-		perror("fork");/*If fork failed, error exit*/
-		return (1);
-	}
+	{perror("fork");/*If fork failed, error exit*/
+		return (1); }
 
 	if (pid == 0)/*Child process*/
 	{
@@ -151,10 +149,8 @@ int run_cmd(char *args[], const char *shell_name)
 			exit(127);
 		}
 		else
-		{
-			perror(shell_name);
-			exit(1);
-		}
+		{perror(shell_name);
+			exit(1); }
 	}
 	else/*Parent process*/
 	{
@@ -168,5 +164,4 @@ int run_cmd(char *args[], const char *shell_name)
 		else
 			return (1);
 	}
-
 }
