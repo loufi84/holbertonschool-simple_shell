@@ -55,7 +55,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	{
 		return (NULL);
 	}
-	if (new_size > old_size)
+	if (new_size > old_size)/*Copy contents from old to new block*/
 	{
 		for (i = 0; i < old_size; i++)
 		{
@@ -133,10 +133,10 @@ int *exit_stat)
 	}
 
 	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		*exit_stat = WEXITSTATUS(status);
+	if (WIFEXITED(status))/*If child exited normally*/
+		*exit_stat = WEXITSTATUS(status);/*Get child's exit status*/
 	else
-		*exit_stat = 1;
+		*exit_stat = 1;/*Default to 1 if abnormal exit*/
 	free(cmd_path);
 }
 
